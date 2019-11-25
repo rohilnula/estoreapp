@@ -58,3 +58,25 @@ export function submit_sellers_login(form) {
             }
         });
 }
+
+export function submit_buyers_login(form) {
+    let state = store.getState();
+    let data = state.forms.buyerslogin;
+    post('/sessions', data)
+        .then((resp) => {
+            if (resp.token) {
+                localStorage.setItem('session', JSON.stringify(resp));
+                store.dispatch({
+                    type: 'LOG_IN',
+                    data: resp,
+                });
+                form.redirect('/');
+            }
+            else {
+                store.dispatch({
+                    type: 'CHANGE_BUYERS_LOGIN',
+                    data: {errors: JSON.stringify(resp.errors)},
+                });
+            }
+        });
+}

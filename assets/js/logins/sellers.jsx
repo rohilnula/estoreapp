@@ -42,7 +42,7 @@ class SellersLogin extends React.Component {
 
         return (
             <div>
-                <h1>Log In</h1>
+                <h1>Hello Seller. Please login!!</h1>
                 { error_msg }
                 <Form.Group controlId="email">
                     <Form.Label>Email</Form.Label>

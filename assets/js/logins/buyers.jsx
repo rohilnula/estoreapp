@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { Form, Button, Alert } from 'react-bootstrap';
 import { Redirect } from 'react-router';
 
-import { submit_sellers_login } from '../ajax';
+import { submit_buyers_login } from '../ajax';
 
 class BuyersLogin extends React.Component {
     constructor(props) {
@@ -24,7 +24,7 @@ class BuyersLogin extends React.Component {
 
     changed(data) {
         this.props.dispatch({
-            type: 'CHANGE_SELLERS_LOGIN',
+            type: 'CHANGE_BUYERS_LOGIN',
             data: data,
         });
     }
@@ -42,7 +42,7 @@ class BuyersLogin extends React.Component {
 
         return (
             <div>
-                <h1>Log In</h1>
+                <h1>Hello Buyer. Please login!</h1>
                 { error_msg }
                 <Form.Group controlId="email">
                     <Form.Label>Email</Form.Label>
@@ -55,7 +55,7 @@ class BuyersLogin extends React.Component {
                         (ev) => this.changed({password: ev.target.value})} />
                 </Form.Group>
                 <Form.Group controlId="submit">
-                    <Button variant="primary" onClick={() => submit_sellers_login(this)}>
+                    <Button variant="primary" onClick={() => submit_buyers_login(this)}>
                         Log in
                     </Button>
                 </Form.Group>
@@ -65,7 +65,7 @@ class BuyersLogin extends React.Component {
 }
 
 function state2props(state) {
-    return state.forms.buyerlogin;
+    return state.forms.buyerslogin;
 }
 
 export default connect(state2props)(BuyersLogin);

@@ -9,6 +9,20 @@ defmodule EstoreappWeb.Router do
     plug :put_secure_browser_headers
   end
 
+  pipeline :ajax do
+    plug :accepts, ["json"]
+    plug :fetch_session
+    plug :protect_from_forgery
+    plug :put_secure_browser_headers
+  end
+
+  scope "/ajax", EstoreappWeb do
+    pipe_through :ajax
+    resources "/sessions", SessionController, only: [:create], singleton: true
+    resources "/sellers", SellerController, except: [:new, :edit]
+    resources "/buyers", BuyerController, except: [:new, :edit]
+  end
+
   pipeline :api do
     plug :accepts, ["json"]
   end
