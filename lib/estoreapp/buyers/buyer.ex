@@ -27,7 +27,7 @@ defmodule Estoreapp.Buyers.Buyer do
     IO.inspect(pw)
     IO.inspect(cset)
     if pw do
-      change(cset, Argon2.add_hash(pw))
+      change(cset, %{:password_hash => Argon2.hash_pwd_salt(pw)})
     else
       cset
     end
