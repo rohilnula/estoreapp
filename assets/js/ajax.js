@@ -80,3 +80,25 @@ export function submit_buyers_login(form) {
             }
         });
 }
+
+export function submit_signup_form(form) {
+    let state = store.getState();
+    let data = state.forms.signup;
+    post('/sessions', data)
+        .then((resp) => {
+            if (resp.token) {
+                localStorage.setItem('session', JSON.stringify(resp));
+                store.dispatch({
+                    type: 'LOG_IN',
+                    data: resp,
+                });
+                form.redirect('/');
+            }
+            else {
+                store.dispatch({
+                    type: 'CHANGE_SIGNUP',
+                    data: {errors: JSON.stringify(resp.errors)},
+                });
+            }
+        });
+}

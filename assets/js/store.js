@@ -1,7 +1,7 @@
 import { createStore, combineReducers } from 'redux';
 import deepFreeze from 'deep-freeze-strict';
 
-function sellerslogin(st0 = {email: "", password: "", category: "sellers", errors: null}, action) {
+function sellerslogin(st0 = {email: "", password: "", category: "Sellers", fullName: "", errors: null, newLogin: false}, action) {
     switch(action.type) {
         case 'CHANGE_SELLERS_LOGIN':
             return Object.assign({}, st0, action.data);
@@ -10,9 +10,18 @@ function sellerslogin(st0 = {email: "", password: "", category: "sellers", error
     }
 }
 
-function buyerslogin(st0 = {email: "", password: "", category: "buyers", errors: null}, action) {
+function buyerslogin(st0 = {email: "", password: "", category: "Buyers", fullName: "", errors: null, newLogin: false}, action) {
     switch(action.type) {
         case 'CHANGE_BUYERS_LOGIN':
+            return Object.assign({}, st0, action.data);
+        default:
+            return st0;
+    }
+}
+
+function signup(st0 = {email: "", password: "", fullName: "", category: "Buyers", errors: null, newLogin: true}, action) {
+    switch(action.type) {
+        case 'CHANGE_SIGNUP':
             return Object.assign({}, st0, action.data);
         default:
             return st0;
@@ -23,6 +32,7 @@ function forms(st0, action) {
     let reducer = combineReducers({
         sellerslogin,
         buyerslogin,
+        signup
     });
     return reducer(st0, action);
 }

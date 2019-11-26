@@ -6,9 +6,13 @@ defmodule EstoreappWeb.SessionController do
   alias Estoreapp.Sellers
   alias Estoreapp.Buyers
 
-  def create(conn, %{"email" => email, "password" => password, "category" => category}) do
-    if category == "sellers" do
+  def create(conn, %{"email" => email, "password" => password, "category" => category, "fullName" => fullName, "newLogin" => newLogin}) do
+    if category == "Sellers" do
       IO.inspect('Sellerssssssssssssssssssssssssssssssssssssssssssssssssssssssssss')
+      if newLogin == true do
+        Sellers.create_seller(%{"email" => email, "password" => password, "name" => fullName})
+      end
+
       user = Sellers.authenticate_user(email, password)
       if user do
         token = Phoenix.Token.sign(conn, "session", user.id)
@@ -24,6 +28,11 @@ defmodule EstoreappWeb.SessionController do
       end  
     else
       IO.inspect('Buyerssssssssssssssssssssssssssssssssssssssssssssssssssssssssss')
+      if newLogin == true do
+        # IO.inspect(%{"email" => email, "password_hash" => password, "name" => fullName})
+        Buyers.create_buyer(%{"email" => email, "password_hash" => password, "name" => fullName})
+      end
+
       user = Buyers.authenticate_user(email, password)
       if user do
         token = Phoenix.Token.sign(conn, "session", user.id)

@@ -14,12 +14,17 @@ defmodule Estoreapp.Sellers.Seller do
   def changeset(seller, attrs) do
     seller
     |> cast(attrs, [:email, :name, :password_hash])
-    |> hash_password()
     |> validate_required([:email, :name, :password_hash])
+    |> validate_length(:password_hash, min: 8) # too short
+    |> hash_password()
   end
 
   def hash_password(cset) do
-    pw = get_change(cset, :password)
-    change(cset, Argon2.add_hash(pw))
+    pw = get_change(cset, :password_hash)
+    if pw do
+      change(cset, Argon2.add_hash(pw))
+    else
+      cset
+    end
   end
 end

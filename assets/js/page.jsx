@@ -8,6 +8,7 @@ import store from './store';
 
 import SellersLogin from './logins/sellers';
 import BuyersLogin from './logins/buyers';
+import SignUp from './signup';
 
 export default function init_page(root) {
   let tree = (
@@ -48,6 +49,10 @@ function Page(props) {
         <Route exact path="/logins/buyers">
           <BuyersLogin />
         </Route>
+
+        <Route exact path="/signup">
+          <SignUp />
+        </Route>
       </Switch>
     </Router>
   );
@@ -85,6 +90,11 @@ let Session = connect(({session}) => ({session}))(({session, dispatch}) => {
         <Nav.Item>
           <NavLink to="/logins/buyers" exact activeClassName="active" className="nav-link">
             Buyer's Login
+          </NavLink>
+        </Nav.Item>
+        <Nav.Item>
+          <NavLink to="/signup" exact activeClassName="active" className="nav-link">
+            Sign Up
           </NavLink>
         </Nav.Item>
       </Nav>
