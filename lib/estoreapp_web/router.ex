@@ -21,6 +21,7 @@ defmodule EstoreappWeb.Router do
     resources "/sessions", SessionController, only: [:create], singleton: true
     resources "/sellers", SellerController, except: [:new, :edit]
     resources "/buyers", BuyerController, except: [:new, :edit]
+    resources "/products", ProductController, except: [:new, :edit]
   end
 
   pipeline :api do
