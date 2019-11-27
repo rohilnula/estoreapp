@@ -6,6 +6,7 @@ defmodule Estoreapp.Repo.Migrations.CreateBuyers do
       add :email, :string
       add :name, :string
       add :password_hash, :string
+      add :money, :float
 
       timestamps()
     end

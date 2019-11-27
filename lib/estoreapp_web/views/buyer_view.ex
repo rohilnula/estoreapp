@@ -14,6 +14,7 @@ defmodule EstoreappWeb.BuyerView do
     %{id: buyer.id,
       email: buyer.email,
       name: buyer.name,
-      password_hash: buyer.password_hash}
+      password_hash: buyer.password_hash,
+      money: buyer.money}
   end
 end
