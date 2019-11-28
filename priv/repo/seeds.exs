@@ -20,7 +20,7 @@ Repo.insert!(%Seller{name: "Bobby", email: "bobby@seller.com", password_hash: pa
 Repo.insert!(%Seller{name: "Cammy", email: "cammy@seller.com", password_hash: pass})
 Repo.insert!(%Seller{name: "Tanny", email: "tanny@seller.com", password_hash: pass})
 
-Repo.insert!(%Buyer{name: "AliceW", email: "alice@buyer.com", password_hash: pass})
-Repo.insert!(%Buyer{name: "BobbyW", email: "bobby@buyer.com", password_hash: pass})
-Repo.insert!(%Buyer{name: "CammyW", email: "cammy@buyer.com", password_hash: pass})
-Repo.insert!(%Buyer{name: "TannyW", email: "tanny@buyer.com", password_hash: pass})
+Repo.insert!(%Buyer{name: "AliceW", email: "alice@buyer.com", password_hash: pass, money: 0.0})
+Repo.insert!(%Buyer{name: "BobbyW", email: "bobby@buyer.com", password_hash: pass, money: 0.0})
+Repo.insert!(%Buyer{name: "CammyW", email: "cammy@buyer.com", password_hash: pass, money: 0.0})
+Repo.insert!(%Buyer{name: "TannyW", email: "tanny@buyer.com", password_hash: pass, money: 0.0})

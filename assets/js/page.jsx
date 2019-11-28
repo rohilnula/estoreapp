@@ -9,6 +9,7 @@ import store from './store';
 import SellersLogin from './logins/sellers';
 import BuyersLogin from './logins/buyers';
 import SignUp from './signup';
+import Profile from './profile/profile';
 
 export default function init_page(root) {
   let tree = (
@@ -53,6 +54,11 @@ function Page(props) {
         <Route exact path="/signup">
           <SignUp />
         </Route>
+
+        <Route exact path="/profile/profile">
+          <Profile />
+        </Route>
+
       </Switch>
     </Router>
   );
@@ -75,6 +81,11 @@ let Session = connect(({session}) => ({session}))(({session, dispatch}) => {
         </Nav.Item>
         <Nav.Item>
           <a className="nav-link" href="#" onClick={logout}>Logout</a>
+        </Nav.Item>
+        <Nav.Item>
+          <NavLink to="/profile/profile" exact activeClassName="active" className="nav-link">
+            My Profile
+          </NavLink>
         </Nav.Item>
       </Nav>
     );

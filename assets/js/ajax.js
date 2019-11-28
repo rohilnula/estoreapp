@@ -19,6 +19,23 @@ export function post(path, body) {
     }).then((resp) => resp.json());
 }
 
+export function put(path, body) {
+    let state = store.getState();
+    let token = state.session ? state.session.token || "" : "";
+
+    return fetch('/ajax' + path, {
+        method: 'put',
+        credentials: 'same-origin',
+        headers: new Headers({
+            'x-csrf-token': window.csrf_token,
+            'content-type': "application/json; charset=UTF-8",
+            'accept': 'application/json',
+            'x-auth': token || "",
+        }),
+        body: JSON.stringify(body),
+    }).then((resp) => resp.json());
+}
+
 export function get(path) {
     let state = store.getState();
     let token = state.session.token || "";
@@ -101,4 +118,31 @@ export function submit_signup_form(form) {
                 });
             }
         });
+}
+
+export function get_all_buyers(){
+    var resp =  get('/buyers').then((resp)=>{
+        return resp;
+      } );
+    
+      return resp.then((r) => r)                                                                                                                                                                                                                                        
+}
+
+export function add_Money(form,classObject, currentMoney) {
+    let state = store.getState();
+    let data = state.forms.buyerslogin;
+    let userid = state.session.user_id;
+    put('/buyers/' + userid, {
+        buyer: {
+            id: userid,
+            money: +form + +currentMoney,
+            email: state.forms.buyerslogin.email,
+
+        }
+    }).then((resp) => {
+        console.log("success");
+        console.log(resp.data.money);
+        classObject.setState({money: resp.data.money});
+    });
+        
 }

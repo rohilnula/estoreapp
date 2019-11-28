@@ -28,13 +28,36 @@ function signup(st0 = {email: "", password: "", fullName: "", category: "Buyers"
     }
 }
 
+function amount(st0 = {money: 0}, action) {
+    switch(action.type) {
+        case 'CHANGE_AMOUNT':
+            return Object.assign({}, st0, action.data);
+        default:
+            return st0;
+    }
+}
+
 function forms(st0, action) {
     let reducer = combineReducers({
         sellerslogin,
         buyerslogin,
-        signup
+        signup,
+        amount
     });
     return reducer(st0, action);
+}
+
+function money(st0 = new Map(), action) {
+    switch (action.type) {
+      case 'ADD_MONEY':
+        let st1 = new Map(st0);
+        for (let money of action.data) {
+          st1.set(money.id, money);
+        }
+        return st1;
+      default:
+        return st0;
+    }
 }
 
 let session0 = localStorage.getItem('session');
@@ -55,6 +78,7 @@ function session(st0 = session0, action) {
 function root_reducer(st0, action) {
     let reducer = combineReducers({
         forms,
+        money,
         session,
     });
     return deepFreeze(reducer(st0, action));

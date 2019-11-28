@@ -26,6 +26,8 @@ defmodule EstoreappWeb.BuyerController do
   end
 
   def update(conn, %{"id" => id, "buyer" => buyer_params}) do
+  IO.inspect("inside the update buyer")
+  IO.inspect(buyer_params)
     buyer = Buyers.get_buyer!(id)
 
     with {:ok, %Buyer{} = buyer} <- Buyers.update_buyer(buyer, buyer_params) do
