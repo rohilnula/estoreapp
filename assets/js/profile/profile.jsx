@@ -54,7 +54,7 @@ class Profile extends React.Component {
         console.log(data);
         this.setState({name: data[0].name, email: data[0].email, money: data[0].money})});
         //console.log("response" + resp);
-       }
+    }
 
     render() { 
         

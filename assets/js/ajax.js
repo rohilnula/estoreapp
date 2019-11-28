@@ -137,11 +137,8 @@ export function add_Money(form,classObject, currentMoney) {
             id: userid,
             money: +form + +currentMoney,
             email: state.forms.buyerslogin.email,
-
         }
     }).then((resp) => {
-        console.log("success");
-        console.log(resp.data.money);
         classObject.setState({money: resp.data.money});
     });
         
