@@ -75,40 +75,17 @@ function Page(props) {
 }
 
 let Session = connect(({session}) => ({session}))(({session, dispatch}) => {
-  function logout(ev) {
-    ev.preventDefault();
-    localStorage.removeItem('session');
-    dispatch({
-      type: 'LOG_OUT',
-    });
-  }
-
+  
   if (session) {
-    return (
-      <Nav>
-        <Nav.Item>
-          <p className="text-light py-2">User: {session.user_name}</p>
-        </Nav.Item>
-        <Nav.Item>
-          <a className="nav-link" href="#" onClick={logout}>Logout</a>
-        </Nav.Item>
-        <Nav.Item>
-          <NavLink to="/profile/profile" exact activeClassName="active" className="nav-link">
-            My Profile
-          </NavLink>
-        </Nav.Item>
-        <Nav.Item>
-          <NavLink to="/products" exact activeClassName="active" className="nav-link">
-            See Products
-          </NavLink>
-        </Nav.Item>
-        <Nav.Item>
-          <NavLink to="/upload" exact activeClassName="active" className="nav-link">
-            Add New Product
-          </NavLink>
-        </Nav.Item>
-      </Nav>
-    );
+    if(session.type == "seller"){
+      return(
+        <SellerPage session = {session} dispatch = {dispatch}/>
+      );
+    }else{
+      return(
+        <BuyerPage session = {session} dispatch = {dispatch}/>
+      );
+    }
   }
   else {
     return (
@@ -132,3 +109,63 @@ let Session = connect(({session}) => ({session}))(({session, dispatch}) => {
     );
   }
 });
+
+function SellerPage(props) {
+  function logout(ev) {
+    ev.preventDefault();
+    localStorage.removeItem('session');
+    props.dispatch({
+      type: 'LOG_OUT',
+    });
+  }
+  return (
+    <Nav>
+        <Nav.Item>
+          <p className="text-light py-2">User: {props.session.user_name}</p>
+        </Nav.Item>
+        <Nav.Item>
+          <a className="nav-link" href="#" onClick={logout}>Logout</a>
+        </Nav.Item>
+        <Nav.Item>
+          <NavLink to="/profile/profile" exact activeClassName="active" className="nav-link">
+            My Profile
+          </NavLink>
+        </Nav.Item>
+        <Nav.Item>
+          <NavLink to="/upload" exact activeClassName="active" className="nav-link">
+            Add New Product
+          </NavLink>
+        </Nav.Item>
+    </Nav>
+  );
+}
+
+function BuyerPage(props) {
+  function logout(ev) {
+    ev.preventDefault();
+    localStorage.removeItem('session');
+    props.dispatch({
+      type: 'LOG_OUT',
+    });
+  }
+  return (
+    <Nav>
+        <Nav.Item>
+          <p className="text-light py-2">User: {props.session.user_name}</p>
+        </Nav.Item>
+        <Nav.Item>
+          <a className="nav-link" href="#" onClick={logout}>Logout</a>
+        </Nav.Item>
+        <Nav.Item>
+          <NavLink to="/profile/profile" exact activeClassName="active" className="nav-link">
+            My Profile
+          </NavLink>
+        </Nav.Item>
+        <Nav.Item>
+          <NavLink to="/products" exact activeClassName="active" className="nav-link">
+            See Products
+          </NavLink>
+        </Nav.Item>
+    </Nav>
+  );
+}
