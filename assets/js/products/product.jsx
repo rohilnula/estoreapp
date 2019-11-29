@@ -27,6 +27,10 @@ class Product extends React.Component {
     }
 
     render() {
+        if (this.state.redirect != null) {
+            return <Redirect to={this.state.redirect} />
+        }
+        
         console.log(this.props.imageSource);
         return (
             <Card style={{ width: '18rem' }}>
@@ -36,7 +40,7 @@ class Product extends React.Component {
                     <Card.Text>
                         Price: {this.props.price}
                     </Card.Text>
-                    <Button variant="primary">Buy</Button>
+                    <Button variant="primary" onClick={() => this.redirect("/productDetails/" + this.props.productId)}>See Details</Button>
                 </Card.Body>
             </Card>
         );

@@ -14,12 +14,7 @@ class ProductsPage extends React.Component {
         super(props);
         
         this.state = {
-            redirect: null,
-            category: "",
-            price: 0.0,
-            imageSrc: "",
-            productName: "",
-            products: [],
+            redirect: null
         };
     }
 
@@ -41,24 +36,42 @@ class ProductsPage extends React.Component {
             }
         }) */
        // console.log(data);
-        this.setState({products: resp.data});
+       if (resp.data.length > 0) {
+            this.props.dispatch({
+                type: 'PRODUCT_DETAILS',
+                data: resp.data,
+            });
+        }
+
+        // this.setState({products: resp.data});
         //console.log("response" + resp);
     })}
 
     render() {
-        if(this.state.products.length == 0){
+        if(this.props.products.size == 0){
             var loadingDiv = [];
                 loadingDiv.push(<div><h1>Please wait, Products Loading ..</h1></div>);
               return loadingDiv;
         }
         var local = [];
         var getItem = [];
-        for(let i =0; i < this.state.products.length; i++){
-            let dataReceived = this.state.products[i];
-            console.log("inside make products " + JSON.stringify(dataReceived))
-            console.log(dataReceived.id);
-          getItem.push(<Col style={{ padding:20}} key = {dataReceived.id}><Product key = {dataReceived.id} productName = {dataReceived.product_name} price = {dataReceived.price}  imageSource ={dataReceived.photo}/></Col>);
+        for (let [key, value] of this.props.products.entries()) {
+            console.log(value);
+            if (typeof value === 'undefined')
+                continue;
+            
+            getItem.push(
+                <Col style={{ padding:20}} key = {value.id}>
+                    <Product key = {value.id} productName = {value.product_name} price = {value.price}  
+                            imageSource ={value.photo} productId = {value.product_id} />
+                </Col>);  
         }
+        // for(let i =0; i < this.props.products.size(); i++){
+        //     let dataReceived = this.props.products[i];
+        //     console.log("inside make products " + JSON.stringify(dataReceived))
+        //     console.log(dataReceived.id);
+        //   getItem.push(<Col style={{ padding:20}} key = {dataReceived.id}><Product key = {dataReceived.id} productName = {dataReceived.product_name} price = {dataReceived.price}  imageSource ={dataReceived.photo} productId = {dataReceived.product_id} /></Col>);
+        // }
         return (
             <div>
                 <Row>
@@ -96,4 +109,8 @@ function MakeProducts(params){
 
 }
 
-export default ProductsPage;
+function state2props(state) {
+    return {products: state.forms.productDetails};
+}
+
+export default connect(state2props)(ProductsPage);

@@ -45,6 +45,18 @@ function new_photo(st0 = {file: null,category: "Electronics", desc: "",discount:
         return st0;
     }
 }
+
+function productDetails (st0 = new Map(), action) {
+    switch(action.type) {
+        case 'PRODUCT_DETAILS':
+            let st1 = new Map(st0);
+            for (let product of action.data)
+                st1.set("" + product.product_id, product);
+            return st1;
+        default:
+            return st0;    
+    }
+}
   
 
 function forms(st0, action) {
@@ -53,7 +65,8 @@ function forms(st0, action) {
         buyerslogin,
         signup,
         amount,
-        new_photo
+        new_photo,
+        productDetails
     });
     return reducer(st0, action);
 }

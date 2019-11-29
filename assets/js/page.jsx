@@ -12,6 +12,7 @@ import SignUp from './signup';
 import Profile from './profile/profile';
 import ProductsPage from './products/productspage';
 import UploadProduct from './sellerproduct/uploadproduct';
+import ProductDetails from './productDetails';
 
 export default function init_page(root) {
   let tree = (
@@ -68,6 +69,10 @@ function Page(props) {
         <Route exact path="/upload">
           <UploadProduct />
         </Route>
+
+        <Route path="/productDetails/:id" component={ProductDetails} />
+          {/* <ProductDetails />
+        </Route> */}
 
       </Switch>
     </Router>
