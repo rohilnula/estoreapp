@@ -20,6 +20,7 @@ defmodule EstoreappWeb.ProductView do
       description: product.description,
       discount: product.discount,
       remaining: product.remaining,
-      photo: product.photo}
+      photo: product.photo,
+      seller_id: product.seller_id}
   end
 end

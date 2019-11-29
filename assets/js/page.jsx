@@ -11,6 +11,7 @@ import BuyersLogin from './logins/buyers';
 import SignUp from './signup';
 import Profile from './profile/profile';
 import ProductsPage from './products/productspage';
+import UploadProduct from './sellerproduct/uploadproduct';
 
 export default function init_page(root) {
   let tree = (
@@ -64,6 +65,10 @@ function Page(props) {
           <ProductsPage />
         </Route>
 
+        <Route exact path="/upload">
+          <UploadProduct />
+        </Route>
+
       </Switch>
     </Router>
   );
@@ -95,6 +100,11 @@ let Session = connect(({session}) => ({session}))(({session, dispatch}) => {
         <Nav.Item>
           <NavLink to="/products" exact activeClassName="active" className="nav-link">
             See Products
+          </NavLink>
+        </Nav.Item>
+        <Nav.Item>
+          <NavLink to="/upload" exact activeClassName="active" className="nav-link">
+            Add New Product
           </NavLink>
         </Nav.Item>
       </Nav>

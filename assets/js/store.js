@@ -1,4 +1,4 @@
-import { createStore, combineReducers } from 'redux';
+import { createStore, combineReducers } from 'redux'; 
 import deepFreeze from 'deep-freeze-strict';
 
 function sellerslogin(st0 = {email: "", password: "", category: "Sellers", fullName: "", errors: null, newLogin: false}, action) {
@@ -13,7 +13,7 @@ function sellerslogin(st0 = {email: "", password: "", category: "Sellers", fullN
 function buyerslogin(st0 = {email: "", password: "", category: "Buyers", fullName: "", errors: null, newLogin: false}, action) {
     switch(action.type) {
         case 'CHANGE_BUYERS_LOGIN':
-            return Object.assign({}, st0, action.data);
+            return Object.assign({}, st0, action.data); 
         default:
             return st0;
     }
@@ -37,12 +37,23 @@ function amount(st0 = {money: 0}, action) {
     }
 }
 
+function new_photo(st0 = {file: null,category: "Electronics", desc: "",discount: 0, price: 0,productId: 0, productName: "", ratings: 0.0, remaining: 0, errors: null}, action) {
+    switch (action.type) {
+      case 'CHANGE_NEW_PHOTO':
+        return Object.assign({}, st0, action.data);
+      default:
+        return st0;
+    }
+}
+  
+
 function forms(st0, action) {
     let reducer = combineReducers({
         sellerslogin,
         buyerslogin,
         signup,
-        amount
+        amount,
+        new_photo
     });
     return reducer(st0, action);
 }
@@ -53,6 +64,19 @@ function money(st0 = new Map(), action) {
         let st1 = new Map(st0);
         for (let money of action.data) {
           st1.set(money.id, money);
+        }
+        return st1;
+      default:
+        return st0;
+    }
+}
+
+function photos(st0 = new Map(), action) {
+    switch (action.type) {
+      case 'ADD_PHOTOS':
+        let st1 = new Map(st0);
+        for (let photo of action.data) {
+          st1.set(photo.id, photo);
         }
         return st1;
       default:
@@ -76,9 +100,11 @@ function session(st0 = session0, action) {
 }
 
 function root_reducer(st0, action) {
+    console.log(st0);
     let reducer = combineReducers({
         forms,
         money,
+        photos,
         session,
     });
     return deepFreeze(reducer(st0, action));

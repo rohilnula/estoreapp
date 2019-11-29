@@ -7,7 +7,7 @@ import { Redirect } from 'react-router';
 import Product from './product';
 // import store from '../store';
 
-// import { get_all_buyers, add_Money } from '../ajax';
+ import { get_all_products} from '../ajax';
 
 class ProductsPage extends React.Component {
     constructor(props) {
@@ -15,6 +15,11 @@ class ProductsPage extends React.Component {
         
         this.state = {
             redirect: null,
+            category: "",
+            price: 0.0,
+            imageSrc: "",
+            productName: "",
+            products: [],
         };
     }
 
@@ -25,11 +30,40 @@ class ProductsPage extends React.Component {
         });
     }
 
+    componentDidMount(){
+        var resp =  get_all_products().then((resp) => {
+        var dataDisplay = resp.data;
+      
+        console.log(resp);
+/*         var data = resp.data.filter((f) => {
+            if (f.id == this.state.userID){
+                return f;
+            }
+        }) */
+       // console.log(data);
+        this.setState({products: resp.data});
+        //console.log("response" + resp);
+    })}
+
     render() {
+        if(this.state.products.length == 0){
+            var loadingDiv = [];
+                loadingDiv.push(<div><h1>Please wait, Products Loading ..</h1></div>);
+              return loadingDiv;
+        }
+        var local = [];
+        var getItem = [];
+        for(let i =0; i < this.state.products.length; i++){
+            let dataReceived = this.state.products[i];
+            console.log("inside make products " + JSON.stringify(dataReceived))
+            console.log(dataReceived.id);
+          getItem.push(<Col style={{ padding:20}} key = {dataReceived.id}><Product key = {dataReceived.id} productName = {dataReceived.product_name} price = {dataReceived.price}  imageSource ={dataReceived.photo}/></Col>);
+        }
         return (
             <div>
-            <h1>TESTER!!!!!!!!!!!!!!!!!</h1>
-            <MakeProducts length={10}/>
+                <Row>
+              {getItem}
+              </Row>
             </div>
         );
     }
@@ -37,8 +71,13 @@ class ProductsPage extends React.Component {
 
 function MakeProducts(params){
   var length = params.length
-  var local = [];
-  var getItem = [];
+  if(params.products.length == 0){
+      var loadingDiv = [];
+      loadingDiv.push(<div><h1>Please wait, Products Loading ..</h1></div>);
+    return loadingDiv;
+  }
+
+ /*  var getItem = [];
   if (length % 3 != 0){
     length = length + (3 - (length % 3));
   }
@@ -50,9 +89,10 @@ function MakeProducts(params){
     }else{
         getItem.push(<Col><Product /></Col>)
     }
-  }
+  } */
 
-  return local;
+  console.log({getItem});
+  return local.push(<Row>{getItem}</Row>);
 
 }
 

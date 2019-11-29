@@ -23,7 +23,7 @@ class SignUp extends React.Component {
     }
 
     redirect(path) {
-        this.setState({path: path});
+        this.setState({path: path}); 
     }
 
     render() {

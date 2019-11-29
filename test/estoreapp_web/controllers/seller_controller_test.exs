@@ -6,15 +6,17 @@ defmodule EstoreappWeb.SellerControllerTest do
 
   @create_attrs %{
     email: "some email",
+    money: 120.5,
     name: "some name",
     password_hash: "some password_hash"
   }
   @update_attrs %{
     email: "some updated email",
+    money: 456.7,
     name: "some updated name",
     password_hash: "some updated password_hash"
   }
-  @invalid_attrs %{email: nil, name: nil, password_hash: nil}
+  @invalid_attrs %{email: nil, money: nil, name: nil, password_hash: nil}
 
   def fixture(:seller) do
     {:ok, seller} = Sellers.create_seller(@create_attrs)
@@ -42,6 +44,7 @@ defmodule EstoreappWeb.SellerControllerTest do
       assert %{
                "id" => id,
                "email" => "some email",
+               "money" => 120.5,
                "name" => "some name",
                "password_hash" => "some password_hash"
              } = json_response(conn, 200)["data"]
@@ -65,6 +68,7 @@ defmodule EstoreappWeb.SellerControllerTest do
       assert %{
                "id" => id,
                "email" => "some updated email",
+               "money" => 456.7,
                "name" => "some updated name",
                "password_hash" => "some updated password_hash"
              } = json_response(conn, 200)["data"]

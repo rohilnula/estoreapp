@@ -27,15 +27,16 @@ class Product extends React.Component {
     }
 
     render() {
+        console.log(this.props.imageSource);
         return (
             <Card style={{ width: '18rem' }}>
-                <Card.Img variant="top" src="holder.js/100px180" />
+                <Card.Img variant="top" src={this.props.imageSource} />
                 <Card.Body>
-                    <Card.Title>Card Title</Card.Title>
+                    <Card.Title>Product Name: {this.props.productName}</Card.Title>
                     <Card.Text>
-                        60
+                        Price: {this.props.price}
                     </Card.Text>
-                    <Button variant="primary">Go somewhere</Button>
+                    <Button variant="primary">Buy</Button>
                 </Card.Body>
             </Card>
         );

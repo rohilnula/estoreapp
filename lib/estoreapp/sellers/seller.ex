@@ -4,6 +4,7 @@ defmodule Estoreapp.Sellers.Seller do
 
   schema "sellers" do
     field :email, :string
+    field :money, :float, default: 0.0
     field :name, :string
     field :password_hash, :string
 
@@ -13,9 +14,8 @@ defmodule Estoreapp.Sellers.Seller do
   @doc false
   def changeset(seller, attrs) do
     seller
-    |> cast(attrs, [:email, :name, :password_hash])
-    |> validate_required([:email, :name, :password_hash])
-    |> validate_length(:password_hash, min: 8) # too short
+    |> cast(attrs, [:email, :name, :password_hash, :money])
+    |> validate_required([:email, :name, :password_hash, :money])
     |> hash_password()
   end
 

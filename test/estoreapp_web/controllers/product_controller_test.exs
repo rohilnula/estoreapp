@@ -13,7 +13,8 @@ defmodule EstoreappWeb.ProductControllerTest do
     product_id: 42,
     product_name: "some product_name",
     ratings: 120.5,
-    remaining: 42
+    remaining: 42,
+    seller_id: 42
   }
   @update_attrs %{
     category_name: "some updated category_name",
@@ -24,9 +25,10 @@ defmodule EstoreappWeb.ProductControllerTest do
     product_id: 43,
     product_name: "some updated product_name",
     ratings: 456.7,
-    remaining: 43
+    remaining: 43,
+    seller_id: 43
   }
-  @invalid_attrs %{category_name: nil, description: nil, discount: nil, photo: nil, price: nil, product_id: nil, product_name: nil, ratings: nil, remaining: nil}
+  @invalid_attrs %{category_name: nil, description: nil, discount: nil, photo: nil, price: nil, product_id: nil, product_name: nil, ratings: nil, remaining: nil, seller_id: nil}
 
   def fixture(:product) do
     {:ok, product} = Products.create_product(@create_attrs)
@@ -61,7 +63,8 @@ defmodule EstoreappWeb.ProductControllerTest do
                "product_id" => 42,
                "product_name" => "some product_name",
                "ratings" => 120.5,
-               "remaining" => 42
+               "remaining" => 42,
+               "seller_id" => 42
              } = json_response(conn, 200)["data"]
     end
 
@@ -90,7 +93,8 @@ defmodule EstoreappWeb.ProductControllerTest do
                "product_id" => 43,
                "product_name" => "some updated product_name",
                "ratings" => 456.7,
-               "remaining" => 43
+               "remaining" => 43,
+               "seller_id" => 43
              } = json_response(conn, 200)["data"]
     end
 

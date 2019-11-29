@@ -12,6 +12,7 @@ defmodule Estoreapp.Repo.Migrations.CreateProducts do
       add :discount, :float
       add :remaining, :integer
       add :photo, :text
+      add :seller_id, :integer
 
       timestamps()
     end

@@ -128,6 +128,15 @@ export function get_all_buyers(){
       return resp.then((r) => r)                                                                                                                                                                                                                                        
 }
 
+export function get_all_products(){
+    var resp =  get('/products').then((resp)=>{
+        return resp;
+      } );
+    
+      return resp.then((r) => r)                                                                                                                                                                                                                                        
+}
+
+
 export function add_Money(form,classObject, currentMoney) {
     let state = store.getState();
     let data = state.forms.buyerslogin;
@@ -142,4 +151,58 @@ export function add_Money(form,classObject, currentMoney) {
         classObject.setState({money: resp.data.money});
     });
         
+}
+
+export function submit_new_photo(form) {
+    let state = store.getState();
+    console.log("state", state);
+    let data = state.forms.new_photo;
+    console.log("started");
+    console.log(data.productName);
+    console.log(data.category);
+    console.log(data.file.name);
+    console.log("done");
+    if (data.file == null) {
+      return;
+    }
+  
+    let reader = new FileReader();
+    let userid = state.session.user_id;
+    console.log("Userrrrrrrrrrrr" + userid)
+    reader.addEventListener("load", () => {
+        console.log("inside post request");
+      post('/products', {
+        product: {
+          description: data.desc,
+          category_name: data.category,
+          //filename: data.file.name,
+          photo: reader.result,
+          discount: data.discount,
+          price: data.price,
+          product_id: data.productId,
+          product_name: data.productName,
+          ratings: data.ratings,
+          remaining: data.remaining,
+          seller_id: userid
+        }
+      }).then((resp) => {
+          console.log("success");
+        console.log(resp);
+        if (resp.data) {
+          store.dispatch({
+            type: 'ADD_PHOTOS',
+            data: [resp.data],
+          });
+          form.redirect('/photos/' + resp.data.id);
+        }
+        else {
+          store.dispatch({
+            type: 'CHANGE_NEW_PHOTO',
+            data: {errors: JSON.stringify(resp.errors)},
+          });
+        }
+      });
+    });
+  
+    reader.readAsDataURL(data.file);
 }

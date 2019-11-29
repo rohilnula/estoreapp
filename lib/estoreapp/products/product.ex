@@ -12,6 +12,7 @@ defmodule Estoreapp.Products.Product do
     field :product_name, :string
     field :ratings, :float
     field :remaining, :integer
+    field :seller_id, :integer
 
     timestamps()
   end
@@ -19,7 +20,7 @@ defmodule Estoreapp.Products.Product do
   @doc false
   def changeset(product, attrs) do
     product
-    |> cast(attrs, [:product_id, :category_name, :product_name, :price, :ratings, :description, :discount, :remaining, :photo])
-    |> validate_required([:product_id, :category_name, :product_name, :price, :ratings, :description, :discount, :remaining, :photo])
+    |> cast(attrs, [:product_id, :category_name, :product_name, :price, :ratings, :description, :discount, :remaining, :photo, :seller_id])
+    |> validate_required([:product_id, :category_name, :product_name, :price, :ratings, :description, :discount, :remaining, :photo, :seller_id])
   end
 end
