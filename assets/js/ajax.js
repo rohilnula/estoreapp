@@ -206,3 +206,37 @@ export function submit_new_photo(form) {
   
     reader.readAsDataURL(data.file);
 }
+
+export function add_Review(text, form, product_id){
+   
+    let state = store.getState();
+    let user_name = state.session.user_name;
+    console.log(user_name);
+    console.log(product_id);
+    post('/reviews', {
+        review:{
+            user: user_name,
+            review: text,
+            product_id: product_id
+        }
+    }).then((resp) => {
+            console.log("ajax");
+            console.log(resp.data);
+            form.state.reviews.push(resp.data);
+            console.log(form.state.reviews);
+            form.setState({reviews: form.state.reviews});
+        });
+
+/*     form.state.reviews.push({name: 'Charlie', review: text});
+    console.log("ajax");
+    console.log(form.state.reviews);
+    form.setState({reviews: form.state.reviews}); */
+}
+
+export function get_all_reviews(){
+    var resp =  get('/reviews').then((resp)=>{
+        return resp;
+      } );
+    
+      return resp.then((r) => r)                                                                                                                                                                                                                                        
+}

@@ -12,7 +12,11 @@ import SignUp from './signup';
 import Profile from './profile/profile';
 import ProductsPage from './products/productspage';
 import UploadProduct from './sellerproduct/uploadproduct';
+<<<<<<< Updated upstream
 import ProductDetails from './productDetails';
+=======
+import Reviews from './reviews/reviews';
+>>>>>>> Stashed changes
 
 export default function init_page(root) {
   let tree = (
@@ -70,9 +74,7 @@ function Page(props) {
           <UploadProduct />
         </Route>
 
-        <Route path="/productDetails/:id" component={ProductDetails} />
-          {/* <ProductDetails />
-        </Route> */}
+        <Route path="/productDetails/:id" component={ProductDetails} />        
 
       </Switch>
     </Router>
@@ -169,6 +171,11 @@ function BuyerPage(props) {
         <Nav.Item>
           <NavLink to="/products" exact activeClassName="active" className="nav-link">
             See Products
+          </NavLink>
+        </Nav.Item>
+        <Nav.Item>
+          <NavLink to="/reviewspage" exact activeClassName="active" className="nav-link">
+            Reviews
           </NavLink>
         </Nav.Item>
     </Nav>
