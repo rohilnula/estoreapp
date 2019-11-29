@@ -18,7 +18,7 @@ class Reviews extends React.Component {
             redirect: null,
             reviews: [],
             inputText: "",
-            product_id: 1,
+            product_id: props.id,
         };
     }
 

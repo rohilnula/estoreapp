@@ -72,11 +72,7 @@ class ProductDetailsPage extends React.Component {
                     </Button>
                 </Form.Group>
                </div>
-               {
-                   /*
-                   User review component to be added over here
-                    */
-               }
+               <Reviews id={this.productId} />
            </div>
        );
     }
