@@ -3,6 +3,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Form, Button, Alert } from 'react-bootstrap';
 import { Redirect } from 'react-router';
+import Reviews from './reviews/reviews';
 
 import { submit_signup_form } from './ajax';
 

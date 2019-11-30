@@ -12,11 +12,8 @@ import SignUp from './signup';
 import Profile from './profile/profile';
 import ProductsPage from './products/productspage';
 import UploadProduct from './sellerproduct/uploadproduct';
-<<<<<<< Updated upstream
 import ProductDetails from './productDetails';
-=======
 import Reviews from './reviews/reviews';
->>>>>>> Stashed changes
 
 export default function init_page(root) {
   let tree = (
