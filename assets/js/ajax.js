@@ -222,9 +222,13 @@ export function add_Review(text, form, product_id){
     }).then((resp) => {
             console.log("ajax");
             console.log(resp.data);
-            form.state.reviews.push(resp.data);
-            console.log(form.state.reviews);
-            form.setState({reviews: form.state.reviews});
+            store.dispatch({
+                type: 'USER_REVIEW',
+                data: resp.data,
+              });
+            // form.state.reviews.push(resp.data);
+            // console.log(form.state.reviews);
+            // form.setState({reviews: form.state.reviews});
         });
 
 /*     form.state.reviews.push({name: 'Charlie', review: text});
@@ -235,7 +239,10 @@ export function add_Review(text, form, product_id){
 
 export function get_all_reviews(){
     var resp =  get('/reviews').then((resp)=>{
-        return resp;
+        store.dispatch({
+            type: 'USER_REVIEWS',
+            data: resp.data,
+          });
       } );
     
       return resp.then((r) => r)                                                                                                                                                                                                                                        

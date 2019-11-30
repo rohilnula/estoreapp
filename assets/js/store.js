@@ -57,6 +57,24 @@ function productDetails (st0 = new Map(), action) {
             return st0;    
     }
 }
+
+function userReviews(st0 = new Map(), action) {
+    let st1 = null;
+    switch(action.type) {
+        case 'USER_REVIEWS':
+            st1 = new Map(st0);
+            for (let review of action.data)
+                st1.set(review.id, review);
+            
+                return st1;
+        case 'USER_REVIEW':
+            st1 = new Map(st0);
+            st1.set(action.data.id, action.data);
+            return st1;
+        default:
+                return st0;
+    }
+}
   
 
 function forms(st0, action) {
@@ -66,7 +84,8 @@ function forms(st0, action) {
         signup,
         amount,
         new_photo,
-        productDetails
+        productDetails,
+        userReviews
     });
     return reducer(st0, action);
 }
