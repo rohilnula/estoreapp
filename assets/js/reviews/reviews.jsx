@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import { Form, Label,Button, Alert } from 'react-bootstrap';
 import { Redirect } from 'react-router';
 import store from '../store';
+import socket from '../socket';
 
 import { get_all_reviews, add_Review } from '../ajax';
 
@@ -15,11 +16,11 @@ class Reviews extends React.Component {
         let userID = localStore.session.user_id;
         //this.setState({userID: userID})
         this.state = {
-            redirect: null,
-            reviews: [],
-            inputText: "",
-            product_id: props.id,
+            redirect: null
         };
+
+        this.productId = props.id;
+        this.inputRef = React.createRef();
     }
 
     redirect(path) {
@@ -29,32 +30,53 @@ class Reviews extends React.Component {
     }
 
     changed(data) {
-        this.setState({inputText: data});
+        // this.setState({inputText: data});
         
-       /*  this.props.dispatch({
-            type: 'ADD_MONEY',
+       this.props.dispatch({
+            type: 'USER_REVIEW',
             data: data,
-        }); */
+        });
 
         //this.props.money = data;
     }
 
 
     componentDidMount(){
-        var resp =  get_all_reviews().then((resp) => {
-        //var dataDisplay = resp.data;
+        this.channel = socket.channel("userReview:" + this.productId, {});
+        this.channel.join().receive("ok", (resp) => {
+            
+        });
+
+        this.channel.on("" + this.product_id, (data) => {
+            this.props.dispatch({
+                type: 'USER_REVIEW',
+                data: data,
+            });
+        });
+
+    //     var resp =  get_all_reviews().then((resp) => {
+    //     //var dataDisplay = resp.data;
       
-        console.log(resp);
-        var data = resp.data.filter((f) => {
-            if (f.product_id == this.state.product_id){
-                return f;
-            }
-        })
-        console.log(data);
-        this.setState({reviews: data});
-        //console.log("response" + resp);
-    })}
+    //     console.log(resp);
+    //     var data = resp.data.filter((f) => {
+    //         if (f.product_id == this.product_id){
+    //             return f;
+    //         }
+    //     })
+    //     console.log(data);
+    //     // this.setState({reviews: data});
+    //     //console.log("response" + resp);
+    // })}
+        get_all_reviews();
+    }
+
+    componentWillUnmount() {
+        this.channel.leave();
+    }
  
+    broadcastAddition() {
+        this.channel.push("" + this.product_id, {});
+    }
 
     render() { 
         
@@ -70,10 +92,17 @@ class Reviews extends React.Component {
         }
 
         var reviewsList = [];
-        for(let i =0; i < this.state.reviews.length; i++){
-            reviewsList.push(<Form.Label>{this.state.reviews[i].user}:{this.state.reviews[i].review}</Form.Label>);
+        for (let [key, value] of this.props.reviews) {
+            if (typeof value === "undefined")
+                continue;
+            
+            reviewsList.push(<Form.Label>{value.user}:{value.review}</Form.Label>);
             reviewsList.push(<br/>);
         }
+        // for(let i =0; i < this.state.reviews.length; i++){
+        //     reviewsList.push(<Form.Label>{this.state.reviews[i].user}:{this.state.reviews[i].review}</Form.Label>);
+        //     reviewsList.push(<br/>);
+        // }
         console.log("reviewsList");
         console.log(reviewsList);
         return (
@@ -89,9 +118,11 @@ class Reviews extends React.Component {
 
                 <Form.Group controlId="submit">
                     <Form.Label>Add Review</Form.Label>
-                    <Form.Control type="text" value = {this.state.inputText} onChange={
-                        (ev) => this.changed( ev.target.value)} />
-                    <Button variant="primary" onClick={() => add_Review(this.state.inputText, this, this.state.product_id)}>
+                    <Form.Control type="text" ref={this.inputRef}/>
+                    <Button variant="primary" onClick={() => {
+                        add_Review(this.inputRef.current.value, this, this.productId);
+                        this.broadcastAddition();
+                        }}>
                        Add Review
                     </Button>
                 </Form.Group>
@@ -101,7 +132,7 @@ class Reviews extends React.Component {
 }
 
 function state2props(state) {
-    return state.forms;
+    return {reviews: state.forms.userReviews};
 }
 
 export default connect(state2props)(Reviews);
