@@ -1,4 +1,4 @@
-defmodule EstoreappWeb.GamesChannel do
+defmodule EstoreappWeb.ReviewChannel do
     use EstoreappWeb, :channel
   
     alias Estoreapp.UserReview
@@ -6,22 +6,22 @@ defmodule EstoreappWeb.GamesChannel do
 
     def join("userReview:" <> productId, payload, socket) do
         if authorized?(payload) do
-            Estoreapp.GameServer.start(productId)
-            userReview = Estoreapp.GameServer.peek(productId)
+            Estoreapp.GameServer.start(to_string(productId))
+            userReview = Estoreapp.GameServer.peek(to_string(productId))
             socket = socket
             |> assign(:userReview, userReview)
             |> assign(:productId, productId)
-            Estoreapp.GameServer.put(productId, userReview)
+            Estoreapp.GameServer.put(to_string(productId), userReview)
             {:ok, %{"join" => productId, "userReview" => userReview}, socket}
         else
             {:error, %{reason: "unauthorized"}}
         end
     end
 
-    def handle_in("addedReview", _, socket) do
-        productId = socket.assigns[:productId]
-        userReview = Estoreapp.GameServer.peek(productId)
-        broadcast! socket, productId + "", %{ "userReview" => userReview}
+    def handle_in("addedReview", %{"productId" => productId}, socket) do
+        # productId = socket.assigns[:productId]
+        userReview = Estoreapp.GameServer.peek(to_string(productId))
+        broadcast! socket, to_string(productId), %{ "userReview" => userReview}
         {:noreply, socket}
     end
 

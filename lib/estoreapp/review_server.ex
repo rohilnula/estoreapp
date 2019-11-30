@@ -17,7 +17,7 @@ defmodule Estoreapp.GameServer do
   
     def start_link(productId) do
       userReview = Estoreapp.BackupAgent.get(productId) || Estoreapp.UserReview.new()
-      GenServer.start_link(__MODULE__, userReview, productId: reg(productId))
+      GenServer.start_link(__MODULE__, userReview, name: reg(productId))
     end
   
     def peek(productId) do

@@ -47,11 +47,8 @@ class Reviews extends React.Component {
             
         });
 
-        this.channel.on("" + this.product_id, (data) => {
-            this.props.dispatch({
-                type: 'USER_REVIEW',
-                data: data,
-            });
+        this.channel.on("" + this.productId, (data) => {
+            get_all_reviews();
         });
 
     //     var resp =  get_all_reviews().then((resp) => {
@@ -59,7 +56,7 @@ class Reviews extends React.Component {
       
     //     console.log(resp);
     //     var data = resp.data.filter((f) => {
-    //         if (f.product_id == this.product_id){
+    //         if (f.productId == this.productId){
     //             return f;
     //         }
     //     })
@@ -75,7 +72,7 @@ class Reviews extends React.Component {
     }
  
     broadcastAddition() {
-        this.channel.push("" + this.product_id, {});
+        this.channel.push("addedReview", {productId: this.productId});
     }
 
     render() { 

@@ -2,7 +2,7 @@ defmodule EstoreappWeb.UserSocket do
   use Phoenix.Socket
 
   ## Channels
-  ## channel "room:*", EstoreappWeb.RoomChannel
+  channel "userReview:*", EstoreappWeb.ReviewChannel
   
   # Socket params are passed from the client and can
   # be used to verify and authenticate a user. After

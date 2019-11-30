@@ -11,7 +11,9 @@ defmodule Estoreapp.Application do
       # Start the Ecto repository
       Estoreapp.Repo,
       # Start the endpoint when the application starts
-      EstoreappWeb.Endpoint
+      EstoreappWeb.Endpoint,
+      Estoreapp.BackupAgent,
+      Estoreapp.GameSup
       # Starts a worker by calling: Estoreapp.Worker.start_link(arg)
       # {Estoreapp.Worker, arg},
     ]

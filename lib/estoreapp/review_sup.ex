@@ -2,11 +2,11 @@ defmodule Estoreapp.GameSup do
     use DynamicSupervisor
   
     def start_link(arg) do
-      DynamicSupervisor.start_link(__MODULE__, arg, productId: __MODULE__)
+      DynamicSupervisor.start_link(__MODULE__, arg, name: __MODULE__)
     end
   
     def init(_arg) do
-      {:ok, _} = Registry.start_link(keys: :unique, productId: Estoreapp.GameReg)
+      {:ok, _} = Registry.start_link(keys: :unique, name: Estoreapp.GameReg)
       DynamicSupervisor.init(strategy: :one_for_one)
     end
   
