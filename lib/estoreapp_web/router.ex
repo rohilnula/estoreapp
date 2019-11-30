@@ -23,6 +23,7 @@ defmodule EstoreappWeb.Router do
     resources "/buyers", BuyerController, except: [:new, :edit]
     resources "/products", ProductController, except: [:new, :edit]
     resources "/reviews", ReviewController, except: [:new, :edit]
+    resources "/carts", CartController, except: [:new, :edit]
   end
 
   pipeline :api do

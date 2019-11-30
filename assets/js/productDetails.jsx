@@ -5,15 +5,14 @@ import { Form, Button, Alert } from 'react-bootstrap';
 import { Redirect } from 'react-router';
 import Reviews from './reviews/reviews';
 
-import { submit_signup_form } from './ajax';
+import { add_to_cart } from './ajax';
 
 class ProductDetailsPage extends React.Component {
     constructor(props) {
         super(props);
 
         this.productId = props.match.params.id;
-        console.log("productId");
-        console.log(this.productId);
+        this.quantity = 1;
 
         this.quantityAsOptions = this.quantityAsOptions.bind(this);
     }
@@ -30,6 +29,7 @@ class ProductDetailsPage extends React.Component {
     }
 
     changed(data) {
+       	this.quantity = parseInt(data['purchasedQty']);
         this.props.dispatch({
             type: 'PRODUCT_DETAILS',
             data: data,
@@ -68,7 +68,7 @@ class ProductDetailsPage extends React.Component {
                     </Form.Control>
                 </Form.Group>
                 <Form.Group controlId="addToCart">
-                    <Button variant="primary" onClick={() => submit_add_cart(this)}>
+                    <Button variant="primary" onClick={() => add_to_cart(this, this.productId, this.quantity)}>
                         Add to cart
                     </Button>
                 </Form.Group>

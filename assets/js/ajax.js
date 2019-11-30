@@ -240,3 +240,21 @@ export function get_all_reviews(){
     
       return resp.then((r) => r)                                                                                                                                                                                                                                        
 }
+
+export function add_to_cart(form, product_id, item_qty) {
+	let state = store.getState();
+    let user_name = state.session.user_name;
+    console.log(form);
+    console.log(store);
+    post('/carts', {
+        cart:{
+            user: user_name,
+            quantity: item_qty,
+            product_id: product_id
+        }
+    }).then((resp) => {
+            console.log("ajax");
+            console.log(resp.data);
+            console.log(form.state.reviews);
+        });
+}

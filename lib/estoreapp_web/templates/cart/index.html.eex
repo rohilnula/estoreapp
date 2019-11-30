@@ -1,0 +1,30 @@
+<h1>Listing Carts</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>User</th>
+      <th>Quantity</th>
+      <th>Product</th>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+<%= for cart <- @carts do %>
+    <tr>
+      <td><%= cart.user %></td>
+      <td><%= cart.quantity %></td>
+      <td><%= cart.product_id %></td>
+
+      <td>
+        <span><%= link "Show", to: Routes.cart_path(@conn, :show, cart) %></span>
+        <span><%= link "Edit", to: Routes.cart_path(@conn, :edit, cart) %></span>
+        <span><%= link "Delete", to: Routes.cart_path(@conn, :delete, cart), method: :delete, data: [confirm: "Are you sure?"] %></span>
+      </td>
+    </tr>
+<% end %>
+  </tbody>
+</table>
+
+<span><%= link "New Cart", to: Routes.cart_path(@conn, :new) %></span>
