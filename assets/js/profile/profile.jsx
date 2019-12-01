@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 import { connect } from 'react-redux';
-import { Form, Label,Button, Alert } from 'react-bootstrap';
+import { Form, Card, Button, Alert, Accordion } from 'react-bootstrap';
 import { Redirect } from 'react-router';
 import store from '../store';
 
@@ -21,6 +21,7 @@ class Profile extends React.Component {
             money: 0.0,
             userID: userID,
             displayMoney: 0.0,
+            ordersClick: false,
         };
     }
 
@@ -54,6 +55,18 @@ class Profile extends React.Component {
         console.log(data);
         this.setState({name: data[0].name, email: data[0].email, money: data[0].money})});
         //console.log("response" + resp);
+    }
+
+    orderClick(){
+        if(this.state.ordersClick === true){
+            this.setState({
+                ordersClick: false,
+            });
+        }else{
+            this.setState({
+                ordersClick: true,
+            });
+        }
     }
 
     render() { 
@@ -94,9 +107,32 @@ class Profile extends React.Component {
                        Add Money
                     </Button>
                 </Form.Group>
+                <Accordion defaultActiveKey="0">
+                    <Card>
+                        <Card.Header>
+                            <Accordion.Toggle as={Button} variant="link" eventKey="0">
+                            My Purchases
+                            </Accordion.Toggle>
+                        </Card.Header>
+                        <Accordion.Collapse eventKey="0">
+                            <Card.Body>Hello! I'm the body</Card.Body>
+                        </Accordion.Collapse>
+                    </Card>
+                </Accordion>                
             </div>
         );
     }
+}
+
+function Showpurchase(props) {
+    var output = [];
+    if(props.show == "show"){
+        output.push(<h1>Show</h1>)
+    }else{
+        output.push(<h1>No Show</h1>)
+    }
+
+    return output;
 }
 
 function state2props(state) {
