@@ -1,4 +1,6 @@
 import React from 'react';
+import { store } from 'react-notifications-component';
+import 'react-notifications-component/dist/theme.css'
 
 import { connect } from 'react-redux';
 import { Form, Button, Alert } from 'react-bootstrap';
@@ -18,6 +20,20 @@ class ProductDetailsPage extends React.Component {
     }
 
     quantityAsOptions(qty) {
+    	store.addNotification({
+  			title: "Wonderful!",
+  			message: "teodosii@react-notifications-component",
+  			type: "success",
+  			insert: "top",
+  			container: "top-right",
+  			animationIn: ["animated", "fadeIn"],
+  			animationOut: ["animated", "fadeOut"],
+  			dismiss: {
+    			duration: 5000,
+    			onScreen: true
+  			}
+		});
+		
         let optionArr = [];
         let i = 1;
         while (qty > 0) {
@@ -54,30 +70,6 @@ class ProductDetailsPage extends React.Component {
         let selectedProduct = this.props.products.get(this.productId);
        return (
            <div>
-           
-           		<View style={{flex: 1, backgroundColor: '#efefef'}}>
-           <TouchableOpacity 
-               onPress={() => this.fadeIn()} 
-               style={Styles.submitButtonStyle}
-               activeOpacity={0.5}
-           >
-               <Text style={Styles.submitTextStyle}>Submit</Text>
-           </TouchableOpacity>
-
-           <Animated.View                 
-              style={{opacity: this.state.fadeIn}}
-           >
-              <View style={Styles.textContainer}>
-                <Text style={{fontSize: 20, textAlign: 'center'}}>Your order has been submitted</Text>
-             </View>
-           </Animated.View>
-       </View>
-       
-       
-       
-       
-           
-           
                <img src={selectedProduct.photo} alt="" className="product-preview"/>
                <div className="product-info-container">
                    <h2>${selectedProduct.price}</h2>

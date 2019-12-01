@@ -13,7 +13,7 @@ defmodule EstoreappWeb.CartView do
   def render("cart.json", %{cart: cart}) do
     %{id: cart.id,
       user: cart.user,
-      product_id: cart.product_id,
-      quantity: cart.quantity}
+      quantity: cart.quantity,
+      product_id: cart.product_id}
   end
 end
