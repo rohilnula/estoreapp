@@ -10,6 +10,7 @@ import SellersLogin from './logins/sellers';
 import BuyersLogin from './logins/buyers';
 import SignUp from './signup';
 import Profile from './profile/profile';
+import ProfileSeller from './profile/profileseller';
 import ProductsPage from './products/productspage';
 import UploadProduct from './sellerproduct/uploadproduct';
 import ProductDetails from './productDetails';
@@ -61,6 +62,10 @@ function Page(props) {
 
         <Route exact path="/profile/profile">
           <Profile />
+        </Route>
+
+        <Route exact path="/profile/profileseller">
+          <ProfileSeller />
         </Route>
 
         <Route exact path="/products">
@@ -131,8 +136,8 @@ function SellerPage(props) {
           <a className="nav-link" href="#" onClick={logout}>Logout</a>
         </Nav.Item>
         <Nav.Item>
-          <NavLink to="/profile/profile" exact activeClassName="active" className="nav-link">
-            My Profile
+          <NavLink to="/profile/profileseller" exact activeClassName="active" className="nav-link">
+            My Profile - Seller
           </NavLink>
         </Nav.Item>
         <Nav.Item>

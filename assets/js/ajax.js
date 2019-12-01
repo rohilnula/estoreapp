@@ -128,6 +128,22 @@ export function get_all_buyers(){
       return resp.then((r) => r)                                                                                                                                                                                                                                        
 }
 
+export function get_all_sellers(){
+    var resp =  get('/sellers').then((resp)=>{
+        return resp;
+      } );
+    
+      return resp.then((r) => r)                                                                                                                                                                                                                                        
+}
+
+export function get_all_purchases(){
+    var resp =  get('/purchases').then((resp)=>{
+        return resp;
+      } );
+    
+      return resp.then((r) => r)                                                                                                                                                                                                                                        
+}
+
 export function get_all_products(){
     var resp =  get('/products').then((resp)=>{
         return resp;

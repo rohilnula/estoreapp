@@ -2,26 +2,27 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 import { connect } from 'react-redux';
-import { Form, Card, Button, Alert, Accordion } from 'react-bootstrap';
+import { Form, Card, Button, Alert, Accordion, Table } from 'react-bootstrap';
 import { Redirect } from 'react-router';
 import store from '../store';
 
-import { get_all_buyers, add_Money } from '../ajax';
+import { get_all_buyers, add_Money, get_all_purchases } from '../ajax';
 
 class Profile extends React.Component {
     constructor(props) {
         super(props);
         let localStore = store.getState();
         let userID = localStore.session.user_id;
-        //this.setState({userID: userID})
+        let userName = localStore.session.user_name;
         this.state = {
             redirect: null,
             name: "",
             email: "",
             money: 0.0,
             userID: userID,
+            userName: userName,
             displayMoney: 0.0,
-            ordersClick: false,
+            purchase_data: [],
         };
     }
 
@@ -33,7 +34,6 @@ class Profile extends React.Component {
 
     changed(data) {
         this.setState({displayMoney: data});
-        console.log(this.state.displayMoney);
        /*  this.props.dispatch({
             type: 'ADD_MONEY',
             data: data,
@@ -46,27 +46,22 @@ class Profile extends React.Component {
         var resp =  get_all_buyers().then((resp) => {
         var dataDisplay = resp.data;
       
-        console.log(resp);
         var data = resp.data.filter((f) => {
             if (f.id == this.state.userID){
                 return f;
             }
-        })
-        console.log(data);
+        });
         this.setState({name: data[0].name, email: data[0].email, money: data[0].money})});
-        //console.log("response" + resp);
-    }
 
-    orderClick(){
-        if(this.state.ordersClick === true){
-            this.setState({
-                ordersClick: false,
+        var resp_purchases =  get_all_purchases().then((resp_purchases) => {      
+            var data_purchases = resp_purchases.data.filter((f) => {
+                if (f.user_name == this.state.userName){
+                    return f;
+                }
             });
-        }else{
-            this.setState({
-                ordersClick: true,
-            });
-        }
+        this.setState({purchase_data: data_purchases})
+        });
+        
     }
 
     render() { 
@@ -115,7 +110,7 @@ class Profile extends React.Component {
                             </Accordion.Toggle>
                         </Card.Header>
                         <Accordion.Collapse eventKey="0">
-                            <Card.Body>Hello! I'm the body</Card.Body>
+                            <Card.Body><Showpurchase purchases = {this.state.purchase_data}/></Card.Body>
                         </Accordion.Collapse>
                     </Card>
                 </Accordion>                
@@ -125,13 +120,26 @@ class Profile extends React.Component {
 }
 
 function Showpurchase(props) {
-    var output = [];
-    if(props.show == "show"){
-        output.push(<h1>Show</h1>)
+    console.log(JSON.stringify(props.purchases) + "=======================")
+    const purchases = props.purchases
+    var output = []
+    var head = []
+    var body = []
+    if(purchases.length === 0){
+        output.push(<h1>No purchases!</h1>)
     }else{
-        output.push(<h1>No Show</h1>)
+        head.push(<thead><tr><th>Product Name</th><th>Quantity Purchased</th><th>Price</th></tr></thead>)
+        for(let i = 0; i < purchases.length; i++){
+            var data = purchases[i];
+            body.push(<tr><td>{data.product_name}</td><td>{data.quantity}</td><td>{data.price}</td></tr>);
+        }
+        output.push(<Table>
+            {head}
+            <tbody>
+                {body}
+            </tbody>
+        </Table>);
     }
-
     return output;
 }
 
