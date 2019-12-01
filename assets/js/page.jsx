@@ -14,7 +14,7 @@ import ProfileSeller from './profile/profileseller';
 import ProductsPage from './products/productspage';
 import UploadProduct from './sellerproduct/uploadproduct';
 import ProductDetails from './productDetails';
-import Reviews from './reviews/reviews';
+import ProductCheckout from './products/productCheckout';
 
 export default function init_page(root) {
   let tree = (
@@ -77,7 +77,9 @@ function Page(props) {
         </Route>
 
         <Route path="/productDetails/:id" component={ProductDetails} />        
-
+        <Route exact path="/checkout">
+          <ProductCheckout />
+        </Route>
       </Switch>
     </Router>
   );
@@ -176,8 +178,9 @@ function BuyerPage(props) {
           </NavLink>
         </Nav.Item>
         <Nav.Item>
-          <NavLink to="/reviewspage" exact activeClassName="active" className="nav-link">
-            Reviews
+          <NavLink to="/checkout" exact activeClassName="active" className="nav-link">
+            Checkout cart
+            {/* Add the logo of cart */}
           </NavLink>
         </Nav.Item>
     </Nav>

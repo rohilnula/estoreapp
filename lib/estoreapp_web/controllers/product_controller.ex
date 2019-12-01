@@ -20,7 +20,7 @@ defmodule EstoreappWeb.ProductController do
     end
   end
 
-  def show(conn, %{"id" => id}) do
+  def show(conn, %{"productId" => id}) do
     product = Products.get_product!(id)
     render(conn, "show.json", product: product)
   end

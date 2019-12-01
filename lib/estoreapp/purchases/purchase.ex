@@ -3,7 +3,6 @@ defmodule Estoreapp.Purchases.Purchase do
   import Ecto.Changeset
 
   schema "purchases" do
-    field :order_id, :integer
     field :price, :float
     field :product_name, :string
     field :quantity, :integer
@@ -15,7 +14,7 @@ defmodule Estoreapp.Purchases.Purchase do
   @doc false
   def changeset(purchase, attrs) do
     purchase
-    |> cast(attrs, [:user_name, :product_name, :quantity, :price, :order_id])
-    |> validate_required([:user_name, :product_name, :quantity, :price, :order_id])
+    |> cast(attrs, [:user_name, :product_name, :quantity, :price])
+    |> validate_required([:user_name, :product_name, :quantity, :price])
   end
 end

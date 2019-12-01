@@ -81,6 +81,20 @@ function userCart(st0 = new Map(), action) {
     return action.data != null ? action.data : st0;
 }
 
+function cartItems (st0 = new Map(), action) {
+    switch(action.type) {
+        case 'CHECKOUT':
+            let st1 = new Map(st0);
+            for (let item of action.data) {
+                st1.set(item.product_id, item);
+            }
+            return st1;
+        default:
+            return st0;
+    }
+}
+  
+
 function forms(st0, action) {
     let reducer = combineReducers({
         sellerslogin,
@@ -90,7 +104,8 @@ function forms(st0, action) {
         new_photo,
         productDetails,
         userReviews,
-        userCart
+        userCart,
+        cartItems
     });
     return reducer(st0, action);
 }

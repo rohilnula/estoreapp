@@ -26,7 +26,7 @@ Repo.insert!(%Buyer{name: "BobbyW", email: "bobby@buyer.com", password_hash: pas
 Repo.insert!(%Buyer{name: "CammyW", email: "cammy@buyer.com", password_hash: pass, money: 0.0})
 Repo.insert!(%Buyer{name: "TannyW", email: "tanny@buyer.com", password_hash: pass, money: 0.0})
 
-Repo.insert!(%Purchase{order_id: 1, price: 10.0, product_name: "TV", quantity: 10, user_name: "Alice"})
-Repo.insert!(%Purchase{order_id: 2, price: 10.0, product_name: "TV", quantity: 10, user_name: "Bobby"})
-Repo.insert!(%Purchase{order_id: 3, price: 10.0, product_name: "TV", quantity: 10, user_name: "Bobby"})
-Repo.insert!(%Purchase{order_id: 4, price: 10.0, product_name: "TV", quantity: 10, user_name: "Alice"})
+Repo.insert!(%Purchase{price: 10.0, product_name: "TV", quantity: 10, user_name: "Alice"})
+Repo.insert!(%Purchase{price: 10.0, product_name: "TV", quantity: 10, user_name: "Bobby"})
+Repo.insert!(%Purchase{price: 10.0, product_name: "TV", quantity: 10, user_name: "Bobby"})
+Repo.insert!(%Purchase{price: 10.0, product_name: "TV", quantity: 10, user_name: "Alice"})

@@ -7,7 +7,6 @@ defmodule Estoreapp.Repo.Migrations.CreatePurchases do
       add :product_name, :string
       add :quantity, :integer
       add :price, :float
-      add :order_id, :integer
 
       timestamps()
     end
