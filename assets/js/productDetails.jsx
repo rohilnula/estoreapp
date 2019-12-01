@@ -1,5 +1,4 @@
-import React, { Component } from 'react';
-import { View, StyleSheet, Animated, TouchableOpacity } from 'react-native';
+import React from 'react';
 
 import { connect } from 'react-redux';
 import { Form, Button, Alert } from 'react-bootstrap';
@@ -16,32 +15,7 @@ class ProductDetailsPage extends React.Component {
         this.quantity = 1;
 
         this.quantityAsOptions = this.quantityAsOptions.bind(this);
-        this.state = {fadeIn: new Animated.Value(0), fadeOut: new Animated.Value(1)};
-        
-        this.fadeIn = this.quantityAsOptions.bind(this);        
-        this.fadeOut = this.quantityAsOptions.bind(this);
     }
-    
-    fadeIn() {
-     this.state.fadeIn.setValue(0)                  
-     Animated.timing(
-       this.state.fadeIn,           
-       {
-         toValue: 1,                   
-         duration: 3000,              
-       }
-     ).start(() => this.fadeOut());                        
-  	}
-
-  	fadeOut() {
-    	Animated.timing(                  
-       	this.state.fadeIn,            
-       	{
-         	toValue: 0,                   
-         	duration: 3000,              
-       	}
-    	).start();                        
-  	}
 
     quantityAsOptions(qty) {
         let optionArr = [];
