@@ -15,10 +15,8 @@ defmodule EstoreappWeb.CartController do
   end
 
   def create(conn, %{"cart" => cart_params}) do
-  	IO.inspect("Reached Here")
     case Carts.create_cart(cart_params) do
       {:ok, cart} ->
-      	IO.inspect("Done")
         conn
         |> put_status(:created)
       	|> put_resp_header("location", Routes.cart_path(conn, :show, cart))

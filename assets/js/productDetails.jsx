@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { Component } from 'react';
+import { View, StyleSheet, Animated, TouchableOpacity } from 'react-native';
 
 import { connect } from 'react-redux';
 import { Form, Button, Alert } from 'react-bootstrap';
@@ -15,7 +16,32 @@ class ProductDetailsPage extends React.Component {
         this.quantity = 1;
 
         this.quantityAsOptions = this.quantityAsOptions.bind(this);
+        this.state = {fadeIn: new Animated.Value(0), fadeOut: new Animated.Value(1)};
+        
+        this.fadeIn = this.quantityAsOptions.bind(this);        
+        this.fadeOut = this.quantityAsOptions.bind(this);
     }
+    
+    fadeIn() {
+     this.state.fadeIn.setValue(0)                  
+     Animated.timing(
+       this.state.fadeIn,           
+       {
+         toValue: 1,                   
+         duration: 3000,              
+       }
+     ).start(() => this.fadeOut());                        
+  	}
+
+  	fadeOut() {
+    	Animated.timing(                  
+       	this.state.fadeIn,            
+       	{
+         	toValue: 0,                   
+         	duration: 3000,              
+       	}
+    	).start();                        
+  	}
 
     quantityAsOptions(qty) {
         let optionArr = [];
@@ -54,6 +80,30 @@ class ProductDetailsPage extends React.Component {
         let selectedProduct = this.props.products.get(this.productId);
        return (
            <div>
+           
+           		<View style={{flex: 1, backgroundColor: '#efefef'}}>
+           <TouchableOpacity 
+               onPress={() => this.fadeIn()} 
+               style={Styles.submitButtonStyle}
+               activeOpacity={0.5}
+           >
+               <Text style={Styles.submitTextStyle}>Submit</Text>
+           </TouchableOpacity>
+
+           <Animated.View                 
+              style={{opacity: this.state.fadeIn}}
+           >
+              <View style={Styles.textContainer}>
+                <Text style={{fontSize: 20, textAlign: 'center'}}>Your order has been submitted</Text>
+             </View>
+           </Animated.View>
+       </View>
+       
+       
+       
+       
+           
+           
                <img src={selectedProduct.photo} alt="" className="product-preview"/>
                <div className="product-info-container">
                    <h2>${selectedProduct.price}</h2>

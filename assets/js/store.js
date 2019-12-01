@@ -75,7 +75,11 @@ function userReviews(st0 = new Map(), action) {
                 return st0;
     }
 }
-  
+ 
+function userCart(st0 = new Map(), action) {
+	console.log("STORE.JS");
+    return action.data != null ? action.data : st0;
+}
 
 function forms(st0, action) {
     let reducer = combineReducers({
@@ -85,7 +89,8 @@ function forms(st0, action) {
         amount,
         new_photo,
         productDetails,
-        userReviews
+        userReviews,
+        userCart
     });
     return reducer(st0, action);
 }

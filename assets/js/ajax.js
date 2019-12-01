@@ -260,8 +260,12 @@ export function add_to_cart(form, product_id, item_qty) {
             product_id: product_id
         }
     }).then((resp) => {
-            console.log("ajax");
-            console.log(resp.data);
-            console.log(form.state.reviews);
+        console.log("ajax");
+        console.log(resp.data);
+        form.setState({cart: resp.data});
+        store.dispatch({
+            type: 'USER_CART',
+            data: resp.data,
         });
+    });
 }
