@@ -117,7 +117,7 @@ class ProductDetailsPage extends React.Component {
                     </Form.Control>
                 </Form.Group>
                 <Form.Group controlId="addToCart">
-                    <Button variant="outline-dark"  onClick={() => add_to_cart(this, this.productId, this.quantity)}>
+                    <Button variant="outline-dark"  onClick={() => add_to_cart(this, selectedProduct.id, this.quantity)}>
                     <i class="fas fa-shopping-cart pull-left" style={{color:'black'}}></i> Add to cart
                     </Button>
                 </Form.Group>

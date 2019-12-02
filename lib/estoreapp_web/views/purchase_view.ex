@@ -15,7 +15,6 @@ defmodule EstoreappWeb.PurchaseView do
       user_name: purchase.user_name,
       product_name: purchase.product_name,
       quantity: purchase.quantity,
-      price: purchase.price,
-      order_id: purchase.order_id}
+      price: purchase.price}
   end
 end

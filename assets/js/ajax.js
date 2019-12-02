@@ -288,15 +288,26 @@ export function add_to_cart(form, product_id, item_qty) {
 
 export function placeOrder(form, total) {
     let state = store.getState();
-    let data = state.forms.cartItems;
+    let data = state.forms.cartItemBrief;
     let user_name = state.session.user_name;
     let userid = state.session.user_id;
-    post('/purchases', {
-        purchase: data,
-        userName: user_name,
-        sum: total,
-        userId: userid
-    }).then((resp) => {
+    let promiseArr = [];
+
+    for (let item of data) {
+        console.log(item);
+        promiseArr.push(post('/purchases', {
+            purchase: item[1],
+            userName: user_name,
+            sum: total,
+            userId: userid
+        }))
+    }
+    
+    Promise.all(promiseArr).then((resp) => {
+        store.dispatch({
+            type: 'CLEAR_CART_ITEMS'
+        });
+        
         form.redirect("/products");
     });
 }
@@ -306,23 +317,26 @@ export function get_all_cart_items() {
     get('/carts').then((resp) => {
         let itemList = [];
         var actualResp = resp;
+        let cartItemList = [];
+
         get_all_products().then(resp => {
             for (let cartItem of resp.data)
                 for (let respItems of actualResp.data)
-                if (respItems.productId == cartItem.productId)
-                    itemList.push(cartItem);
+                    if (respItems.product_id == cartItem.id) {
+                        itemList.push(cartItem);
+                        respItems.cart_id = respItems.id;
+                        cartItemList.push(respItems);
+                    }
             
             store.dispatch({
-                type: 'CHECKOUT',
+                type: 'USER_CART_DETAILS',
                 data: itemList
-            }); 
+            });
+            
+            store.dispatch({
+                type: 'CART_ITEMS',
+                data: cartItemList
+            });
         });
-        // for (let cartItem of resp.data) {
-        //     get_product_info(cartItem.product_id)
-        // }
-        // store.dispatch({
-        //     type: 'CHECKOUT',
-        //     data: resp.data,
-        // });
     });
 }

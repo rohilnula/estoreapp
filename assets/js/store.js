@@ -83,12 +83,27 @@ function userCart(st0 = new Map(), action) {
 
 function cartItems (st0 = new Map(), action) {
     switch(action.type) {
-        case 'CHECKOUT':
+        case 'USER_CART_DETAILS':
             let st1 = new Map(st0);
             for (let item of action.data) {
                 st1.set(item.product_id, item);
             }
             return st1;
+        default:
+            return st0;
+    }
+}
+
+function cartItemBrief (st0 = new Map(), action) {
+    switch(action.type) {
+        case 'CART_ITEMS':
+            let st1 = new Map(st0);
+            for (let item of action.data) {
+                st1.set(item.product_id, item);
+            }
+            return st1;
+        case 'CLEAR_CART_ITEMS':
+            return new Map();
         default:
             return st0;
     }
@@ -105,7 +120,8 @@ function forms(st0, action) {
         productDetails,
         userReviews,
         userCart,
-        cartItems
+        cartItems,
+        cartItemBrief
     });
     return reducer(st0, action);
 }
