@@ -65,7 +65,7 @@ export function submit_sellers_login(form) {
                     type: 'LOG_IN',
                     data: resp,
                 });
-                form.redirect('/');
+                form.redirect('/profile/profileseller');
             }
             else {
                 store.dispatch({
@@ -87,7 +87,7 @@ export function submit_buyers_login(form) {
                     type: 'LOG_IN',
                     data: resp,
                 });
-                form.redirect('/');
+                form.redirect('/profile/profile');
             }
             else {
                 store.dispatch({
@@ -125,7 +125,7 @@ export function get_all_buyers(){
         return resp;
       } );
     
-      return resp.then((r) => r)                                                                                                                                                                                                                                        
+    return resp.then((r) => r)                                                                                                                                                                                                                                        
 }
 
 export function get_all_sellers(){
@@ -133,7 +133,7 @@ export function get_all_sellers(){
         return resp;
       } );
     
-      return resp.then((r) => r)                                                                                                                                                                                                                                        
+    return resp.then((r) => r)                                                                                                                                                                                                                                        
 }
 
 export function get_all_purchases(){

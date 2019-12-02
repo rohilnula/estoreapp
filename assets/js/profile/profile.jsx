@@ -105,7 +105,7 @@ class Profile extends React.Component {
                 <Accordion defaultActiveKey="0">
                     <Card>
                         <Card.Header>
-                            <Accordion.Toggle as={Button} variant="link" eventKey="0">
+                            <Accordion.Toggle as={Button} variant="link" eventKey="1">
                             My Purchases
                             </Accordion.Toggle>
                         </Card.Header>

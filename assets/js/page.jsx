@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import { BrowserRouter as Router, Switch, Route, NavLink, Link } from 'react-router-dom';
 import { Navbar, Nav, Col } from 'react-bootstrap';
 import { Provider, connect } from 'react-redux';
+import { Redirect } from 'react-router';
 
 import store from './store';
 
@@ -100,6 +101,7 @@ let Session = connect(({session}) => ({session}))(({session, dispatch}) => {
   }
   else {
     return (
+      <div>
       <Nav>
         <Nav.Item>
           <NavLink to="/logins/sellers" exact activeClassName="active" className="nav-link">
@@ -117,6 +119,8 @@ let Session = connect(({session}) => ({session}))(({session, dispatch}) => {
           </NavLink>
         </Nav.Item>
       </Nav>
+      <Redirect to={"/"} />
+      </div>
     );
   }
 });
@@ -130,24 +134,28 @@ function SellerPage(props) {
     });
   }
   return (
-    <Nav>
-        <Nav.Item>
-          <p className="text-light py-2">User: {props.session.user_name}</p>
-        </Nav.Item>
-        <Nav.Item>
-          <a className="nav-link" href="#" onClick={logout}>Logout</a>
-        </Nav.Item>
-        <Nav.Item>
-          <NavLink to="/profile/profileseller" exact activeClassName="active" className="nav-link">
-            My Profile - Seller
-          </NavLink>
-        </Nav.Item>
-        <Nav.Item>
-          <NavLink to="/upload" exact activeClassName="active" className="nav-link">
-            Add New Product
-          </NavLink>
-        </Nav.Item>
-    </Nav>
+    <div>
+      <Nav>
+          <Nav.Item>
+            <p className="text-light py-2">User: {props.session.user_name}</p>
+          </Nav.Item>
+          <Nav.Item>
+              <NavLink to="/" exact activeClassName="active" className="nav-link">
+                    <a className="nav-link" href="#" onClick={logout}>Logout</a>
+              </NavLink>
+          </Nav.Item>
+          <Nav.Item>
+            <NavLink to="/profile/profileseller" exact activeClassName="active" className="nav-link">
+              My Profile - Seller
+            </NavLink>
+          </Nav.Item>
+          <Nav.Item>
+            <NavLink to="/upload" exact activeClassName="active" className="nav-link">
+              Add New Product
+            </NavLink>
+          </Nav.Item>
+      </Nav>
+    </div>
   );
 }
 
@@ -158,6 +166,7 @@ function BuyerPage(props) {
     props.dispatch({
       type: 'LOG_OUT',
     });
+
   }
   return (
     <Nav>

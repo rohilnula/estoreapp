@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import { Form, Card, Button, Alert, Accordion, Table } from 'react-bootstrap';
+import { Form, Alert } from 'react-bootstrap';
 import { Redirect } from 'react-router';
 import store from '../store';
 
@@ -62,7 +62,7 @@ class ProfileSeller extends React.Component {
                 <h1>Profile Page</h1>
                 { error_msg }
                 <Form.Group controlId="email">
-                    <Form.Label>Email:: </Form.Label>
+                    <Form.Label>Email:</Form.Label>
                     <Form.Label>{this.state.email}</Form.Label>
                 </Form.Group>
                 <Form.Group controlId="name">
