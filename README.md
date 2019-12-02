@@ -18,3 +18,9 @@ Ready to run in production? Please [check our deployment guides](https://hexdocs
   * Docs: https://hexdocs.pm/phoenix
   * Mailing list: http://groups.google.com/group/phoenix-talk
   * Source: https://github.com/phoenixframework/phoenix
+  
+## Attribution
+
+  For reference in deployment, coding in React, POSTGRES, 
+  Elixir: http://www.ccs.neu.edu/home/ntuck/courses/2019/09/cs5610/notes/
+  Image Art Used from: http://fontawesome.com/
