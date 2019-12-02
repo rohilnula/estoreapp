@@ -284,6 +284,7 @@ export function add_to_cart(form, product_id, item_qty) {
             type: 'USER_CART',
             data: resp.data,
         });
+        form.changeState();
     });
 }
 

@@ -21,6 +21,9 @@ class ProductDetailsPage extends React.Component {
         this.quantity = 1;
 
         this.quantityAsOptions = this.quantityAsOptions.bind(this);
+        this.state = {
+            cartMessage: ""
+        }
     }
 
     quantityAsOptions(qty) {
@@ -54,6 +57,9 @@ class ProductDetailsPage extends React.Component {
             type: 'PRODUCT_DETAILS',
             data: data,
         });
+    }
+    changeState(){
+        this.setState({cartMessage: 'Added to Cart'});
     }
 
     render() {
@@ -92,7 +98,7 @@ class ProductDetailsPage extends React.Component {
                        
                 <div className = "marginTop" style={{border: '1px solid gray'}}>
                     {/* <FontAwesomeIcon icon = "faCoffee"/> */}
-                    Description:<br/><span style={{fontWeight:'bold', fontSize: 'large'}}>{selectedProduct.description}</span><br/>    
+                    Description:<br/><span  style={{fontWeight:'bold', fontSize: 'large', float: 'left'}}>{selectedProduct.description}</span><br/>    
                     Deal of the Day: <span style={{color:'red'}}>${selectedProduct.price}</span> <br/>
                    Product Name: <span>{selectedProduct.product_name}</span>
                     <br/><span>by Seller</span> <br/>
@@ -120,7 +126,9 @@ class ProductDetailsPage extends React.Component {
                 <Form.Group controlId="addToCart">
                     <Button variant="outline-dark"  onClick={() => add_to_cart(this, selectedProduct.id, this.quantity)}>
                     <i class="fas fa-shopping-cart pull-left" style={{color:'black'}}></i> Add to cart
+                   
                     </Button>
+                    <Form.Label>{cartMessage}</Form.Label>
                 </Form.Group>
                 <h6>ships from and sold by E-Store</h6>
                 </div>
