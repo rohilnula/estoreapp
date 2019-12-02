@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 import { connect } from 'react-redux';
-import { Form, Label,Button, Alert, Grid, Container, Row, Col } from 'react-bootstrap';
+import { Spinner , Row, Col, Form } from 'react-bootstrap';
 import { Redirect } from 'react-router';
 import Product from './product';
 // import store from '../store';
@@ -14,7 +14,8 @@ class ProductsPage extends React.Component {
         super(props);
         
         this.state = {
-            redirect: null
+            redirect: null,
+            category: 'Electronics'
         };
     }
 
@@ -25,11 +26,29 @@ class ProductsPage extends React.Component {
         });
     }
 
+    changed(data) {
+        //Electronics
+        console.log('data i ' + JSON.stringify(data));
+        switch(data.category){
+            case 'Electronics':
+                this.setState({category: 'Electronics'});
+                break;
+            case 'Fashion':
+                    console.log('changed funtion');
+                 this.setState({category: 'Fashion'}); 
+                 break;
+            case 'Home Decor':
+                  this.setState({category: 'Home Decor'});
+                  break;
+            default:      
+                this.setState({category: 'Electronics'});
+        }
+      }
     componentDidMount(){
         var resp =  get_all_products().then((resp) => {
         var dataDisplay = resp.data;
       
-        console.log(resp);
+       // console.log(resp);
 /*         var data = resp.data.filter((f) => {
             if (f.id == this.state.userID){
                 return f;
@@ -50,21 +69,27 @@ class ProductsPage extends React.Component {
     render() {
         if(this.props.products.size == 0){
             var loadingDiv = [];
-                loadingDiv.push(<div><h1>Please wait, Products Loading ..</h1></div>);
+                loadingDiv.push(<div className='mt-50'><h1><Spinner animation= 'border' variant='info' size='lg'></Spinner></h1></div>);
               return loadingDiv;
         }
         var local = [];
         var getItem = [];
         for (let [key, value] of this.props.products.entries()) {
-            console.log(value);
+            //console.log(value);
             if (typeof value === 'undefined')
                 continue;
             
+                /* console.log("in the render");    
+                console.log(this.state.category);
+                console.log(value.category_name); */  
+            if(value.category_name == this.state.category){
+                 
             getItem.push(
                 <Col style={{ padding:20}} key = {value.id}>
                     <Product key = {value.id} productName = {value.product_name} price = {value.price}  
-                            imageSource ={value.photo} productId = {value.product_id} />
-                </Col>);  
+                            imageSource ={value.photo} productId = {value.product_id} rating={value.ratings}/>
+                </Col>); 
+            } 
         }
         // for(let i =0; i < this.props.products.size(); i++){
         //     let dataReceived = this.props.products[i];
@@ -74,6 +99,15 @@ class ProductsPage extends React.Component {
         // }
         return (
             <div>
+                <Form.Group controlId="category">
+                   <Form.Label>Category</Form.Label>
+                   <Form.Control as="select" onChange={
+                        (ev) => this.changed({category: ev.target.value})}>
+                            <option>Electronics</option>
+                            <option>Home Decor</option>
+                            <option>Fashion</option>
+                    </Form.Control>
+                </Form.Group>
                 <Row>
               {getItem}
               </Row>
@@ -104,7 +138,7 @@ function MakeProducts(params){
     }
   } */
 
-  console.log({getItem});
+  //console.log({getItem});
   return local.push(<Row>{getItem}</Row>);
 
 }

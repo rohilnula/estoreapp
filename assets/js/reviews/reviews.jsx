@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 import { connect } from 'react-redux';
-import { Form, Label,Button, Alert } from 'react-bootstrap';
+import { Form, Label,Button, Alert, InputGroup } from 'react-bootstrap';
 import { Redirect } from 'react-router';
 import store from '../store';
 import socket from '../socket';
@@ -93,7 +93,7 @@ class Reviews extends React.Component {
             if (typeof value === "undefined")
                 continue;
             
-            reviewsList.push(<Form.Label>{value.user}:{value.review}</Form.Label>);
+            reviewsList.push(<Form.Label><span style={{fontWeight:'bold'}}>{value.user}: </span><span style={{fontSize: 'large'}}>{value.review}</span></Form.Label>);
             reviewsList.push(<br/>);
         }
         // for(let i =0; i < this.state.reviews.length; i++){
@@ -104,25 +104,31 @@ class Reviews extends React.Component {
         console.log(reviewsList);
         return (
             
-            <div>
-                <h1>Reviews Page</h1>
+            <div style={{border: '2px solid gray',borderRadius: '20px' ,padding: '7px'}}>
+                <h3><span style={{fontWeight:'bold', fontSize: 'large', color: 'red'}}>Customer Reviews</span></h3>
                 { error_msg }
-                <Form.Label>Reviews:<br/> </Form.Label>
+                <div className = 'overflowClass'>
                 <Form.Group controlId="email">
                     
                     <Form.Label>{reviewsList}</Form.Label>
                 </Form.Group>
-
-                <Form.Group controlId="submit">
-                    <Form.Label>Add Review</Form.Label>
-                    <Form.Control type="text" ref={this.inputRef}/>
-                    <Button variant="primary" onClick={() => {
+                </div>
+                <InputGroup  className='mt-3'>
+               
+                    <Form.Control   placeholder='Add Review' ref={this.inputRef}/>
+                    <InputGroup.Append>
+                    <Button className='ml-3' variant="primary" onClick={() => {
                         add_Review(this.inputRef.current.value, this, this.productId);
                         this.broadcastAddition();
                         }}>
                        Add Review
                     </Button>
-                </Form.Group>
+                    </InputGroup.Append>
+ 
+               
+                </InputGroup>
+
+
             </div>
         );
     }

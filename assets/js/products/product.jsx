@@ -31,18 +31,33 @@ class Product extends React.Component {
             return <Redirect to={this.state.redirect} />
         }
         
-        console.log(this.props.imageSource);
+        //console.log(this.props.imageSource);
+        //ratings
+        let r = this.props.rating;
+        var rating = [];
+        for (let i=0; i < r; i++){
+            rating.push(<i className="fas fa-star" style={{color:'orange'}}></i>);
+        }
+       //, backgroundColor: 'red
+     //console.log("hello "+ 5 - r);
         return (
-            <Card style={{ width: '18rem' }}>
-                <Card.Img variant="top" src={this.props.imageSource} />
+        <div className='card' style={{ width: '18rem', 'maxHeight':'150px'}}>
+            <Card  style={{ display: 'block'}} >
+                <Card.Img style={{ height:'200px' }} variant="top" src={this.props.imageSource} />
                 <Card.Body>
-                    <Card.Title>Product Name: {this.props.productName}</Card.Title>
+                    <Card.Title><span style={{color:'blue', fontSize: 'large'}}>{this.props.productName}</span></Card.Title>
                     <Card.Text>
-                        Price: {this.props.price}
+                    {rating} <br/>
+                        Price: <span style={{color:'red', fontSize: 'large'}}>${this.props.price}</span> 
+                       {/* <div style={{ display: 'inline-block', lineHeight:'10px'}} className='ml-3'>
+                        {rating}
+                        </div> */}
                     </Card.Text>
                     <Button variant="primary" onClick={() => this.redirect("/productDetails/" + this.props.productId)}>See Details</Button>
+                    
                 </Card.Body>
             </Card>
+            </div>    
         );
     }
 }

@@ -1,11 +1,15 @@
 import React from 'react';
 import { store } from 'react-notifications-component';
 import 'react-notifications-component/dist/theme.css'
+import ReactDOM from 'react-dom';
 
 import { connect } from 'react-redux';
-import { Form, Button, Alert } from 'react-bootstrap';
+import { Form, Button, Alert, Row, Col, Spinner,Card } from 'react-bootstrap';
 import { Redirect } from 'react-router';
 import Reviews from './reviews/reviews';
+//import {Font} from '@fortawesome/fontawesome-free'
+//import {FontAwesomeIcon} from '@fortawesome';
+//import {faCoffee} from '@fortawesome/free-solid-svg-icons';
 
 import { add_to_cart } from './ajax';
 
@@ -68,28 +72,64 @@ class ProductDetailsPage extends React.Component {
         */
 
         let selectedProduct = this.props.products.get(this.productId);
+        var in_stock =  selectedProduct.remaining;
+        var stockdisplay = in_stock > 10 ? true: false; 
+        let r = selectedProduct.ratings;
+        var rating = [];
+        for (let i=0; i < r; i++){
+            rating.push(<i class="fas fa-star" style={{color:'orange'}}></i>);
+        }
        return (
            <div>
-               <img src={selectedProduct.photo} alt="" className="product-preview"/>
-               <div className="product-info-container">
-                   <h2>${selectedProduct.price}</h2>
-                   <h3>{selectedProduct.product_name}</h3>
-                   <h4>Ratings: {selectedProduct.ratings}</h4>
-                   <span className="product-details">{selectedProduct.description}</span>
-                   <Form.Group controlId="quantity">
-                    <Form.Label>Select quantity</Form.Label>
+               
+               <Row>
+                   <Col md={5}>
+                  
+                   <img src={selectedProduct.photo} alt="" className="product-preview"/>
+                   </Col>
+                    <Col md={{span: 5}}>
+                       
+                <div className = "marginTop" style={{border: '1px solid gray'}}>
+                    {/* <FontAwesomeIcon icon = "faCoffee"/> */}
+                    Description:<span style={{fontWeight:'bold', fontSize: 'large'}}>{selectedProduct.description}</span><br/>    
+                    Deal of the Day: <span style={{color:'red'}}>${selectedProduct.price}</span> <br/>
+                   Product Name: <span>{selectedProduct.product_name}</span>
+                    <span>by Seller</span> <br/>
+                    Ratings: <span>{rating}</span> <br/>
+                    <span>Thanksgiving is over, No more Discount!</span>
+                </div>
+                    </Col>
+                    <Col md={2} >
+                    <div className = "marginTop" style={{border: '1px solid gray'}}>
+                    <span style={{color:'red', fontSize: 'large'}}>$ {selectedProduct.price}</span> <br/>
+                    <br/>
+                    <span>No Free Return and Delivery</span> <br/>
+                    {
+                        stockdisplay ? (<span if style={{color:'green', fontSize: 'large'}}>In Stock.</span>) : (<span if style={{color:'red', fontSize: 'large'}}>Out of Stock.</span>)
+                    }
+                    <br/>
+                    
+                    <Form.Group controlId="quantity">
+                    <Form.Label>Qty</Form.Label>
                     <Form.Control as="select" onChange={
                         (ev) => this.changed({purchasedQty: ev.target.value})}>
                             {this.quantityAsOptions(selectedProduct.remaining)}
                     </Form.Control>
                 </Form.Group>
                 <Form.Group controlId="addToCart">
-                    <Button variant="primary" onClick={() => add_to_cart(this, this.productId, this.quantity)}>
-                        Add to cart
+                    <Button variant="outline-dark"  onClick={() => add_to_cart(this, this.productId, this.quantity)}>
+                    <i class="fas fa-shopping-cart pull-left" style={{color:'black'}}></i> Add to cart
                     </Button>
                 </Form.Group>
-               </div>
+                <h6>ships from and sold by E-Store</h6>
+                </div>
+                    </Col>
+               </Row>
+            <Row className='marginTop'>
+                <Col>
                <Reviews id={this.productId} />
+                </Col>
+            </Row>
            </div>
        );
     }
