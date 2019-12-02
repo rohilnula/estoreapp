@@ -128,7 +128,7 @@ class ProductDetailsPage extends React.Component {
                     <i class="fas fa-shopping-cart pull-left" style={{color:'black'}}></i> Add to cart
                    
                     </Button>
-                    <Form.Label>{cartMessage}</Form.Label>
+                  {/*   <Form.Label>{this.state.cartMessage}</Form.Label> */}
                 </Form.Group>
                 <h6>ships from and sold by E-Store</h6>
                 </div>

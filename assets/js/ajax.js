@@ -122,6 +122,8 @@ export function submit_signup_form(form) {
 
 export function get_all_buyers(){
     var resp =  get('/buyers').then((resp)=>{
+
+        
         return resp;
       } );
     
@@ -154,6 +156,7 @@ export function get_all_products(){
 
 
 export function add_Money(form,classObject, currentMoney) {
+    
     let state = store.getState();
     let data = state.forms.buyerslogin;
     let userid = state.session.user_id;
@@ -165,6 +168,11 @@ export function add_Money(form,classObject, currentMoney) {
         }
     }).then((resp) => {
         classObject.setState({money: resp.data.money});
+        store.dispatch({
+            type: 'CHANGE_AMOUNT',
+            data: resp.data,
+        });
+        
     });
         
 }
@@ -284,7 +292,7 @@ export function add_to_cart(form, product_id, item_qty) {
             type: 'USER_CART',
             data: resp.data,
         });
-        form.changeState();
+        //form.changeState(); 
     });
 }
 

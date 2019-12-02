@@ -23,6 +23,8 @@ class Profile extends React.Component {
             userName: userName,
             displayMoney: 0.0,
             purchase_data: [],
+            money_data: [],
+            flag: false,
         };
     }
 
@@ -42,22 +44,29 @@ class Profile extends React.Component {
         //this.props.money = data;
     }
 
+    
+    set_money(){
+        this.setState({flag:true});
+    }
+
     componentDidMount(){
         var resp =  get_all_buyers().then((resp) => {
         var dataDisplay = resp.data;
       
         var data = resp.data.filter((f) => {
             if (f.id == this.state.userID){
+                this.setState({money_data: f});
                 return f;
             }
         });
+        console.log('data ' + JSON.stringify(data));
         this.setState({name: data[0].name, email: data[0].email, money: data[0].money})});
-
+        
         var resp_purchases =  get_all_purchases().then((resp_purchases) => {      
             var data_purchases = resp_purchases.data.filter((f) => {
                 if (f.user_name == this.state.userName){
                     return f;
-                }
+                } 
             });
         this.setState({purchase_data: data_purchases})
         }); 
@@ -76,7 +85,14 @@ class Profile extends React.Component {
         if (errors) {
             error_msg = <Alert variant="danger">{ errors }</Alert>;
         }
-
+console.log('hi' + JSON.stringify(this.state.money_data));
+        store.dispatch({
+            type: 'CHANGE_AMOUNT',
+            data: this.state.money_data,
+        });
+        //this.set_money();
+        /* if(!this.state.flag){
+        add_Money(this.state.displayMoney, this, this.state.money);} */
         return (
             
             <div>
