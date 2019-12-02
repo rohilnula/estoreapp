@@ -15,4 +15,27 @@ the products present in the Store. Applied filter based on the Catego
 -ry selected to display the products.
 b. Implemented and Designed the ProductDetails Page, where all the 
 details related to the a product are displayed. This page contains
-Reviews for the Product. 
+ Details for a Product such as Reviews, InStock, Quantity Available.
+c. Implemented Displaying and Adding Reviews for a product, Adding
+money to the Buyer.
+d. Implemented Uploading Product by a Seller.
+e. Handled CSS for some pages.  
+f. Deployed the App
+
+Tharun:
+a. Implemented and designed the Adding to Cart Functionality.
+b. Handled the Elixir Code for validating all the pages.
+d. Implemented AJAX methods to retieve the details for the users.
+e. Handled the CSS for some pages.
+f. Deployed the App
+
+Shyam:
+a. Implemented and designed the Live Feed for Product Reviews.
+b. Implemeted and designed the Buying Products from the Cart of a
+   Buyer by validating the money present in his Account and adding
+   the money to the respective Seller.
+c. Designed and Implemented the Sign Up Page for the Users.
+d. Handled the functionality for posting current product details
+   and other related information to pages.
+e. Implemented AJAX methods to retieve the details for the users.
+f. Deployed the App
