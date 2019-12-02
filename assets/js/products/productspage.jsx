@@ -100,7 +100,7 @@ class ProductsPage extends React.Component {
         return (
             <div>
                 <Form.Group controlId="category">
-                   <Form.Label>Category</Form.Label>
+                <span style={{color:'red'}}><Form.Label>Select Category</Form.Label></span>
                    <Form.Control as="select" onChange={
                         (ev) => this.changed({category: ev.target.value})}>
                             <option>Electronics</option>

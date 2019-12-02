@@ -17,6 +17,7 @@ class UploadProduct extends React.Component {
 
     this.state = {
       redirect: null,
+      message: "",
     }
   }
 
@@ -40,6 +41,10 @@ class UploadProduct extends React.Component {
     this.changed({file: file});
   }
 
+  set_message(msg){
+    this.setState({message: msg});
+  }
+
   render() {
     let {file, desc, errors, dispatch} = this.props;
     let error_msg = null;
@@ -52,8 +57,8 @@ class UploadProduct extends React.Component {
     }
 
     return (
-      <div>
-        <h1>New Photo</h1>
+      <div className='marginTop'style={{border: '1px solid gray', borderRadius: '10px'}}>
+      <h1 style={{color:'blue', opacity: '0.5'}}>Upload a New Product!!</h1>
         { error_msg }
         <Form.Group controlId="type">
                     <Form.Label>Select type of account</Form.Label>
@@ -106,8 +111,10 @@ class UploadProduct extends React.Component {
         <Form.Group controlId="submit">
           <Button variant="primary"
                   onClick={() => submit_new_photo(this)}>
-            Upload Photo</Button>
+            Upload Product</Button>
+            <Form.Label>{this.state.message}</Form.Label>
         </Form.Group>
+        
       </div>
     );
   }

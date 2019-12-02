@@ -41,7 +41,7 @@ class Product extends React.Component {
        //, backgroundColor: 'red
      //console.log("hello "+ 5 - r);
         return (
-        <div className='card' style={{ width: '18rem', 'maxHeight':'150px'}}>
+        <div className='cardDisplay' style={{ width: '18rem', 'maxHeight':'150px'}}>
             <Card  style={{ display: 'block'}} >
                 <Card.Img style={{ height:'200px' }} variant="top" src={this.props.imageSource} />
                 <Card.Body>

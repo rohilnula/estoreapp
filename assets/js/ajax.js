@@ -209,7 +209,8 @@ export function submit_new_photo(form) {
             type: 'ADD_PHOTOS',
             data: [resp.data],
           });
-          form.redirect('/photos/' + resp.data.id);
+          form.set_message('Product uploaded Successfully');
+         // form.redirect('/photos/' + resp.data.id);
         }
         else {
           store.dispatch({

@@ -60,7 +60,7 @@ class Profile extends React.Component {
                 }
             });
         this.setState({purchase_data: data_purchases})
-        });
+        }); 
         
     }
 
@@ -80,19 +80,22 @@ class Profile extends React.Component {
         return (
             
             <div>
-                <h1>Profile Page</h1>
+        
                 { error_msg }
+                <div className = "marginTopMore" style={{border: '1px solid gray'}}>
                 <Form.Group controlId="email">
-                    <Form.Label>Email:: </Form.Label>
-                    <Form.Label>{this.state.email}</Form.Label>
+                    <Form.Label>Email: </Form.Label>
+                    <span style={{fontWeight:'bold', fontSize: 'large'}}> <Form.Label>{this.state.email}</Form.Label> </span>
                 </Form.Group>
                 <Form.Group controlId="name">
-                    <Form.Label>Name::</Form.Label>
-                    <Form.Label>{this.state.name}</Form.Label>
+                    <Form.Label>Name:</Form.Label>
+                    <span style={{fontWeight:'bold', fontSize: 'large', color:'green'}}> <Form.Label>{this.state.name}</Form.Label></span>
                 </Form.Group>
+                </div>
+                <div className = "marginTopMore" style={{border: '1px solid gray'}}>
                 <Form.Group controlId="money">
-                    <Form.Label>Current Amount:  </Form.Label>
-                    <Form.Label>{this.state.money}</Form.Label>
+                    <Form.Label>Money in Account:  </Form.Label>
+                    <span style={{fontWeight:'bold', fontSize: 'large', color: 'red'}}><Form.Label>$ {this.state.money}</Form.Label></span>
                 </Form.Group>
                 <Form.Group controlId="submit">
                     <Form.Label>Add Money</Form.Label>
@@ -102,6 +105,8 @@ class Profile extends React.Component {
                        Add Money
                     </Button>
                 </Form.Group>
+                </div>
+                <div className = "marginTopMore" style={{border: '1px solid gray'}}>
                 <Accordion defaultActiveKey="0">
                     <Card>
                         <Card.Header>
@@ -109,11 +114,12 @@ class Profile extends React.Component {
                             My Purchases
                             </Accordion.Toggle>
                         </Card.Header>
-                        <Accordion.Collapse eventKey="0">
+                        <Accordion.Collapse eventKey="1">
                             <Card.Body><Showpurchase purchases = {this.state.purchase_data}/></Card.Body>
                         </Accordion.Collapse>
                     </Card>
-                </Accordion>                
+                </Accordion>   
+                </div>             
             </div>
         );
     }

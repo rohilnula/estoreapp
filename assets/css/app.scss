@@ -1,6 +1,6 @@
 /* This file is for your main application css. */
 
-$body-bg: #BBB; // With scss, Bootstrap lets us override colors and stuff.
+$body-bg: #FFF; // With scss, Bootstrap lets us override colors and stuff.
 @import "~bootstrap/scss/bootstrap";
 
 .product-preview{
@@ -21,3 +21,37 @@ $body-bg: #BBB; // With scss, Bootstrap lets us override colors and stuff.
     height: 120px;
     overflow-y: scroll
 }
+
+.marginTopMore{
+    margin-top: 30px;
+    padding: 15px;
+    border-radius: 20px;
+}
+
+.marginTopLogins{
+    margin-top: 5%;
+    padding: 15px;
+    border-radius: 20px;
+    border: 1px solid blue;
+}
+
+.marginTopSellerLogins{
+    margin-top: 10%;
+    padding: 15px;
+    border-radius: 20px;
+    border: 1px solid blue;
+}
+
+.cardDisplay:hover {
+    -ms-transform: scale(1.2); /* IE 9 */
+    -webkit-transform: scale(1.2); /* Safari 3-8 */
+    transform: scale(1.2); 
+    cursor: pointer;
+  }
+
+  .image-ProductDetails:hover{
+    -ms-transform: scale(1.2); /* IE 9 */
+    -webkit-transform: scale(1.2); /* Safari 3-8 */
+    transform: scale(1.2); 
+    cursor: pointer;
+  }

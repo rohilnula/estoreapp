@@ -38,7 +38,8 @@ class SignUp extends React.Component {
         }
 
         return (
-            <div>
+            <div className='marginTopLogins' style={{border: '1px solid gray'}}>
+                <h1 style={{color:'blue', opacity: '0.5',margin:'25px'}}>Hello Seller. Please login!!</h1>
                 <Form.Group controlId="Full Name">
                     <Form.Label>Full Name</Form.Label>
                     <Form.Control type="text" onChange={

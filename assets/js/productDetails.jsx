@@ -73,7 +73,7 @@ class ProductDetailsPage extends React.Component {
 
         let selectedProduct = this.props.products.get(this.productId);
         var in_stock =  selectedProduct.remaining;
-        var stockdisplay = in_stock > 10 ? true: false; 
+        var stockdisplay = in_stock > 0 ? true: false; 
         let r = selectedProduct.ratings;
         var rating = [];
         for (let i=0; i < r; i++){
@@ -84,17 +84,18 @@ class ProductDetailsPage extends React.Component {
                
                <Row>
                    <Col md={5}>
-                  
+                  <div className='image-ProductDetails'>
                    <img src={selectedProduct.photo} alt="" className="product-preview"/>
+                   </div>
                    </Col>
                     <Col md={{span: 5}}>
                        
                 <div className = "marginTop" style={{border: '1px solid gray'}}>
                     {/* <FontAwesomeIcon icon = "faCoffee"/> */}
-                    Description:<span style={{fontWeight:'bold', fontSize: 'large'}}>{selectedProduct.description}</span><br/>    
+                    Description:<br/><span style={{fontWeight:'bold', fontSize: 'large'}}>{selectedProduct.description}</span><br/>    
                     Deal of the Day: <span style={{color:'red'}}>${selectedProduct.price}</span> <br/>
                    Product Name: <span>{selectedProduct.product_name}</span>
-                    <span>by Seller</span> <br/>
+                    <br/><span>by Seller</span> <br/>
                     Ratings: <span>{rating}</span> <br/>
                     <span>Thanksgiving is over, No more Discount!</span>
                 </div>

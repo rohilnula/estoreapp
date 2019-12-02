@@ -30,23 +30,24 @@ function Page(props) {
   return (
     <Router>
       <Navbar bg="dark" variant="dark">
-        <Col md="8">
+        <Col md="6">
           <Nav>
             <Nav.Item>
               <NavLink to="/" exact activeClassName="active" className="nav-link">
-                Welcome to E-Store
+              <i class="fas fa-home" style={{fontSize: '35px'}}/>
               </NavLink>
             </Nav.Item>
           </Nav>
         </Col>
-        <Col md="4">
+        <Col md="6">
           <Session />
         </Col>
       </Navbar>
 
       <Switch>
         <Route exact path="/">
-          <h1>One Stop Purchase Website!!!!!!!!!!!!!!!!!! We are Happy You are here.</h1>
+          <h1 style={{color:'blue', opacity: '0.5',margin:'25px'}}>We are happy, you are here. Login to check our Exciting Products!</h1>
+          <i class="fas fa-shopping-cart" style={{fontSize: '500px', color:'green', opacity: '0.5', paddingLeft: '25%'}}/>
         </Route>
 
         <Route exact path="/logins/sellers">
@@ -169,29 +170,31 @@ function BuyerPage(props) {
 
   }
   return (
-    <Nav>
-        <Nav.Item>
-          <p className="text-light py-2">User: {props.session.user_name}</p>
-        </Nav.Item>
-        <Nav.Item>
-          <a className="nav-link" href="#" onClick={logout}>Logout</a>
-        </Nav.Item>
-        <Nav.Item>
-          <NavLink to="/profile/profile" exact activeClassName="active" className="nav-link">
-            My Profile
-          </NavLink>
-        </Nav.Item>
-        <Nav.Item>
-          <NavLink to="/products" exact activeClassName="active" className="nav-link">
-            See Products
-          </NavLink>
-        </Nav.Item>
-        <Nav.Item>
-          <NavLink to="/checkout" exact activeClassName="active" className="nav-link">
-            Checkout cart
-            {/* Add the logo of cart */}
-          </NavLink>
-        </Nav.Item>
-    </Nav>
+    <div>
+      <Nav>
+          <Nav.Item>
+            <p className="text-light py-2">User: {props.session.user_name}</p>
+          </Nav.Item>
+          <Nav.Item>
+            <a className="nav-link" href="#" onClick={logout}>Logout</a>
+          </Nav.Item>
+          <Nav.Item>
+            <NavLink to="/profile/profile" exact activeClassName="active" className="nav-link">
+              My Profile
+            </NavLink>
+          </Nav.Item>
+          <Nav.Item>
+            <NavLink to="/products" exact activeClassName="active" className="nav-link">
+              See Products
+            </NavLink>
+          </Nav.Item>
+          <Nav.Item>
+            <NavLink to="/checkout" exact activeClassName="active" className="nav-link">
+              Checkout cart
+              {/* Add the logo of cart */}
+            </NavLink>
+          </Nav.Item>
+      </Nav>
+    </div>
   );
 }

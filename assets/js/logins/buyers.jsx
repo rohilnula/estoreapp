@@ -41,16 +41,17 @@ class BuyersLogin extends React.Component {
         }
 
         return (
-            <div>
-                <h1>Hello Buyer. Please login!</h1>
+            <div className='marginTopLogins' style={{border: '1px solid gray'}}>
+                <h1 style={{color:'blue', opacity: '0.5',margin:'25px'}}>Hello Buyer. Please login!</h1>
+                
                 { error_msg }
                 <Form.Group controlId="email">
-                    <Form.Label>Email</Form.Label>
+                    <Form.Label>Enter your Email</Form.Label>
                     <Form.Control type="text" onChange={
                         (ev) => this.changed({email: ev.target.value})} />
                 </Form.Group>
                 <Form.Group controlId="password">
-                    <Form.Label>Password</Form.Label>
+                    <Form.Label>Enter your Password</Form.Label>
                     <Form.Control type="password" onChange={
                         (ev) => this.changed({password: ev.target.value})} />
                 </Form.Group>

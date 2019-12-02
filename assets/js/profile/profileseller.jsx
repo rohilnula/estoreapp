@@ -59,20 +59,21 @@ class ProfileSeller extends React.Component {
         return (
             
             <div>
-                <h1>Profile Page</h1>
                 { error_msg }
+                <div className = "marginTopSellerLogins" style={{border: '1px solid gray'}}>
                 <Form.Group controlId="email">
                     <Form.Label>Email:</Form.Label>
-                    <Form.Label>{this.state.email}</Form.Label>
+                    <span style={{fontWeight:'bold', fontSize: 'large'}}> <Form.Label>{this.state.email}</Form.Label></span>
                 </Form.Group>
                 <Form.Group controlId="name">
-                    <Form.Label>Name::</Form.Label>
-                    <Form.Label>{this.state.name}</Form.Label>
+                    <Form.Label>Name:</Form.Label>
+                    <span style={{fontWeight:'bold', fontSize: 'large'}}> <Form.Label>{this.state.name}</Form.Label></span>
                 </Form.Group>
                 <Form.Group controlId="money">
-                    <Form.Label>Current Amount:  </Form.Label>
-                    <Form.Label>{this.state.money}</Form.Label>
-                </Form.Group>                
+                    <Form.Label>Deposited Money:  </Form.Label>
+                    <span style={{color:'red', fontSize: 'large'}}><Form.Label>${this.state.money}</Form.Label></span>
+                </Form.Group>    
+                </div>            
             </div>
         );
     }
