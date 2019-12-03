@@ -10,7 +10,7 @@ defmodule EstoreappWeb.SessionController do
     if category == "Sellers" do
       IO.inspect('Sellerssssssssssssssssssssssssssssssssssssssssssssssssssssssssss')
       if newLogin == true do
-        Sellers.create_seller(%{"email" => email, "password" => password, "name" => fullName})
+        Sellers.create_seller(%{"email" => email, "password_hash" => password, "name" => fullName})
       end
 
       user = Sellers.authenticate_user(email, password)

@@ -22,7 +22,7 @@ defmodule Estoreapp.Sellers.Seller do
   def hash_password(cset) do
     pw = get_change(cset, :password_hash)
     if pw do
-      change(cset, Argon2.hash_pwd_salt(pw))
+      change(cset, %{:password_hash => Argon2.hash_pwd_salt(pw)})
     else
       cset
     end
