@@ -350,3 +350,39 @@ export function get_all_cart_items() {
         });
     });
 }
+
+export function get_current_location(form){
+
+    console.log("Inside the current Location");
+    var lat = 42.3379411;
+    let long = -71.087482;
+    if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition((position) =>
+    {
+       var lat = position.coords.latitude;
+       var long = position.coords.longitude;
+
+       //fetch('https://maps.googleapis.com/maps/api/geocode/json?latlng=42.3379411,-71.087482&key=AIzaSyBDEf-bxaNm5u9GDnjJAt1rXwVXJ2fMr-w').then((res) => {
+        fetch('https://maps.googleapis.com/maps/api/geocode/json?latlng='+lat+','+long+'&key=AIzaSyBDEf-bxaNm5u9GDnjJAt1rXwVXJ2fMr-w').then((res) => { 
+        
+        return res.json();
+       }).then(body => {
+           console.log('sai');
+           console.log(body.results[0].formatted_address);
+            form.redirect(body.results[0].formatted_address);
+       });
+
+       fetch('https://api.exchangeratesapi.io/latest').then((res) => { 
+        return res.json();
+       }).then(body => {
+        console.log("================================>>>>>>>>>>>>>>>>>>>>")
+        console.log(body.rates.INR);
+         form.redirect2(body.rates.INR);
+    });
+       
+
+    });
+  } else { 
+    form.redirect("Geolocation is not supported by this browser.");
+  }
+}

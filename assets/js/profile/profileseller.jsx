@@ -4,6 +4,7 @@ import ReactDOM from 'react-dom';
 import { Form, Alert } from 'react-bootstrap';
 import { Redirect } from 'react-router';
 import store from '../store';
+import Location from '../location';
 
 import { get_all_sellers} from '../ajax';
 
@@ -59,8 +60,10 @@ class ProfileSeller extends React.Component {
         return (
             
             <div>
+                  <Location/> 
                 { error_msg }
                 <div className = "marginTopSellerLogins" style={{border: '1px solid gray'}}>
+                  
                 <Form.Group controlId="email">
                     <Form.Label>Email:</Form.Label>
                     <span style={{fontWeight:'bold', fontSize: 'large'}}> <Form.Label>{this.state.email}</Form.Label></span>

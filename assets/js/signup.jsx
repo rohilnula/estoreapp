@@ -116,7 +116,7 @@ class SignUp extends React.Component {
                     <Form.Control as="select" onChange={
                         (ev) => this.changed({category: ev.target.value})}>
                             <option>Buyer</option>
-                            <option>Seller</option>
+                            <option>Sellers</option>
                     </Form.Control>
                 </Form.Group>
                 <Form.Group controlId="submit">

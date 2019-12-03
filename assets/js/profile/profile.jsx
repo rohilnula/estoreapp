@@ -6,6 +6,8 @@ import { Form, Card, Button, Alert, Accordion, Table } from 'react-bootstrap';
 import { Redirect } from 'react-router';
 import store from '../store';
 
+import Location from '../location';
+
 import { get_all_buyers, add_Money, get_all_purchases } from '../ajax';
 
 class Profile extends React.Component {
@@ -96,7 +98,7 @@ console.log('hi' + JSON.stringify(this.state.money_data));
         return (
             
             <div>
-        
+                <Location/>
                 { error_msg }
                 <div className = "marginTopMore" style={{border: '1px solid gray'}}>
                 <Form.Group controlId="email">
