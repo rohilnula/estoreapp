@@ -109,7 +109,7 @@ export function submit_signup_form(form) {
                     type: 'LOG_IN',
                     data: resp,
                 });
-                form.redirect('/');
+                form.redirect('/profile/profile');
             }
             else {
                 store.dispatch({

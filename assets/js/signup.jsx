@@ -35,7 +35,7 @@ class SignUp extends React.Component {
     }
 
     redirect(path) {
-        this.setState({path: path}); 
+        this.setState({"path": path}); 
     }
     
     submitPressed() {
@@ -54,7 +54,7 @@ class SignUp extends React.Component {
     }
 
     render() {
-        if (this.state.redirect) {
+        if (this.state.path != null) {
             return <Redirect to={this.state.redirect} />
         }
 
@@ -66,7 +66,7 @@ class SignUp extends React.Component {
 
         return (
             <div className='marginTopLogins' style={{border: '1px solid gray'}}>
-                <h1 style={{color:'blue', opacity: '0.5',margin:'25px'}}>Hello Seller. Please login!!</h1>
+                <h1 style={{color:'blue', opacity: '0.5',margin:'25px'}}>Create Your Account</h1>
         		
                 <Form noValidate validated={this.state.isNameValid}>
                 	<Form.Group md="1" controlId="Full Name">
@@ -84,7 +84,7 @@ class SignUp extends React.Component {
                 </Form>
                 <Form noValidate validated={this.state.isUserNameValid}>
                 	<Form.Group md="1" controlId="username">
-                    	<Form.Label>User Name</Form.Label>
+                    	<Form.Label>Email Address</Form.Label>
                     	<Form.Control
             				required
             				type="text"
@@ -92,7 +92,7 @@ class SignUp extends React.Component {
             				onChange={(ev) => this.changed({email: ev.target.value})}
           				/>
           				<Form.Control.Feedback type="invalid">
-            				Please provide a valid user name.
+            				Please provide a valid email address.
           				</Form.Control.Feedback>
                 	</Form.Group>
                 </Form>
