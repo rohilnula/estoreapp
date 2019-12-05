@@ -26,7 +26,7 @@ defmodule EstoreappWeb.PurchaseController do
 
     seller = Sellers.get_seller!(Map.get(product, :seller_id))
     sellerMoney = Map.get(seller, :money)
-    Sellers.update_seller(seller, %{"money" => sellerMoney - Map.get(product, :price)})
+    Sellers.update_seller(seller, %{"money" => sellerMoney + sum})
 
     cart = Carts.get_cart!(purchase_params["cart_id"])
     Carts.delete_cart(cart)

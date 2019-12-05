@@ -119,7 +119,7 @@ console.log('hi' + JSON.stringify(this.state.money_data));
                     <Form.Label>Add Money</Form.Label>
                     <Form.Control type="text" value = {this.state.displayMoney} onChange={
                         (ev) => this.changed( ev.target.value)} />
-                    <Button variant="primary" onClick={() => add_Money(this.state.displayMoney, this, this.state.money)}>
+                    <Button className="mt-3" variant="primary" onClick={() => add_Money(this.state.displayMoney, this, this.state.money)}>
                        Add Money
                     </Button>
                 </Form.Group>
