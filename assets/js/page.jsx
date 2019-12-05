@@ -1,9 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter as Router, Switch, Route, NavLink, Link } from 'react-router-dom';
-import { Navbar, Nav, Col } from 'react-bootstrap';
+import { Navbar, Nav, Col, NavDropdown } from 'react-bootstrap';
 import { Provider, connect } from 'react-redux';
 import { Redirect } from 'react-router';
+import "react-responsive-carousel/lib/styles/carousel.min.css";
+import { Carousel } from 'react-responsive-carousel';
 
 import store from './store';
 
@@ -46,8 +48,16 @@ function Page(props) {
 
       <Switch>
         <Route exact path="/">
-          <h1 style={{color:'blue', opacity: '0.5',margin:'25px'}}>We are happy, you are here. Login to check our Exciting Products!</h1>
-          <i class="fas fa-shopping-cart" style={{fontSize: '500px', color:'green', opacity: '0.5', paddingLeft: '25%'}}/>
+          <Carousel className="mt-5" style={{height: '500px'}}>
+            <div>
+                <img src="https://review.chinabrands.com/chinabrands/seo/image/20190219/dubai online shopping sites,.png"/>
+                <p className="legend">Deal of the day</p>
+            </div>
+            <div>
+                <img src="https://review.chinabrands.com/chinabrands/seo/image/20190219/dubai online shopping sites.png" />
+                <p className="legend">Best deals for money</p>
+            </div>
+            </Carousel>
         </Route>
 
         <Route exact path="/logins/sellers">
@@ -137,14 +147,10 @@ function SellerPage(props) {
   return (
     <div>
       <Nav>
-          <Nav.Item>
-            <p className="text-light py-2">User: {props.session.user_name}</p>
-          </Nav.Item>
-          <Nav.Item>
-              <NavLink to="/" exact activeClassName="active" className="nav-link">
-                    <a className="nav-link" href="#" onClick={logout}>Logout</a>
-              </NavLink>
-          </Nav.Item>
+          <NavDropdown title={"Welcome: " + props.session.user_name} id="nav-dropdown">
+            <NavDropdown.Item><NavLink to="/profile/profile">My Profile</NavLink></NavDropdown.Item>
+            <NavDropdown.Item><NavLink onClick={logout}>Logout</NavLink></NavDropdown.Item>
+          </NavDropdown>
           <Nav.Item>
             <NavLink to="/profile/profileseller" exact activeClassName="active" className="nav-link">
               My Profile - Seller
@@ -172,17 +178,10 @@ function BuyerPage(props) {
   return (
     <div>
       <Nav>
-          <Nav.Item>
-            <p className="text-light py-2">User: {props.session.user_name}</p>
-          </Nav.Item>
-          <Nav.Item>
-            <a className="nav-link" href="#" onClick={logout}>Logout</a>
-          </Nav.Item>
-          <Nav.Item>
-            <NavLink to="/profile/profile" exact activeClassName="active" className="nav-link">
-              My Profile
-            </NavLink>
-          </Nav.Item>
+          <NavDropdown title={"Welcome: " + props.session.user_name} id="nav-dropdown">
+            <NavDropdown.Item><NavLink to="/profile/profile">My Profile</NavLink></NavDropdown.Item>
+            <NavDropdown.Item><NavLink to="" onClick={logout}>Logout</NavLink></NavDropdown.Item>
+          </NavDropdown>
           <Nav.Item>
             <NavLink to="/products" exact activeClassName="active" className="nav-link">
               See Products
